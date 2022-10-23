@@ -34,7 +34,6 @@ export default function CMV(props) {
               onClick={retriveCard}
               data-bs-toggle="modal"
               data-bs-target="#cmv-voter-id"
-              
             >
               Download ID Card
             </button>

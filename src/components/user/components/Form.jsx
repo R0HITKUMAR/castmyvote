@@ -59,8 +59,8 @@ export default function Form(props) {
 
       // Upload file to S3
       const s3 = new AWS.S3({
-        accessKeyId: "AKIAVOENIHH7GYLY5QBK",
-        secretAccessKey: "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",
+        accessKeyId: process.env.AWS_ACCESS_KEY,
+        secretAccessKey:process.env.AWS_SECRET_KEY,
         region: "us-east-1",
       });
 
