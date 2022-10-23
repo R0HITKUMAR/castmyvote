@@ -1,0 +1,41 @@
+#main-landing {
+  padding: 30vh 0px;
+  height: 100vh;
+  background: white;
+}
+#main-landing .logo {
+  height: 150px;
+}
+
+#main-landing h1 {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: 4.5em;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+}
+
+#main-landing h5 {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+}
+#main-landing .btn {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 30px 10px;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  border: 2px solid rgb(0, 0, 0);
+}
+
+#main-landing .btn:hover {
+  background: rgb(0, 0, 0);
+  color: #ffffff;
+}
