@@ -21,7 +21,7 @@ export default function Reset() {
       ...data,
       [name]: value,
     });
-  }
+  };
 
   const sendOTP = (e) => {
     e.preventDefault();
@@ -33,7 +33,7 @@ export default function Reset() {
             ...data,
             systemOTP: res.data,
           });
-          setAlert("OTP sent to your email");
+          setAlert("OTP sent to your email & Phone");
           setStep(1);
         })
         .catch((err) => {
@@ -42,7 +42,7 @@ export default function Reset() {
     } else {
       setAlert("Please fill all the fields");
     }
-  }
+  };
 
   const verifyOTP = (e) => {
     e.preventDefault();
@@ -50,9 +50,9 @@ export default function Reset() {
       setAlert("OTP Verified Successfully");
       setStep(2);
     } else {
-      setAlert("Invalid OTP")
+      setAlert("Invalid OTP");
     }
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -67,7 +67,6 @@ export default function Reset() {
               ...data,
               email: "",
             });
-
           }
         })
         .catch((err) => {
@@ -76,8 +75,7 @@ export default function Reset() {
     } else {
       setAlert("Something Went Wrong");
     }
-
-  }
+  };
 
   return (
     <div className="container-xxl">
@@ -101,98 +99,105 @@ export default function Reset() {
                 {alert}
               </p>
               <form className="mb-3">
-                {step === 0 && (<><div className="mb-3">
-                  <label htmlFor="email" className="form-label">
-                    Email
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="email"
-                    value={data.email}
-                    onChange={handleChange}
-                    placeholder="Enter your email"
-                  />
-                </div>
-                  <button onClick={sendOTP} className="btn btn-primary d-grid w-100">
-                    Send OTP
-                  </button>
-                </>
-                )}
-                {step === 1 && (<>
-                  <div className="mb-3">
-                    <label className="form-label">
-                      Email
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="email"
-                      onChange={handleChange}
-                      value={data.email}
-                      placeholder="Enter your email"
-                      readOnly
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label className="form-label">
-                      OTP
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="otp"
-                      onChange={handleChange}
-                      placeholder="Enter OTP Send over your Email"
-                    />
-                  </div>
-                  <button onClick={verifyOTP} className="btn btn-primary d-grid w-100">
-                    Verify OTP
-                  </button>
-                </>
-                )}
-                {step === 2 && (<>
-                  <div className="mb-3">
-                    <label className="form-label">
-                      Email
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="email"
-                      value={data.email}
-                      onChange={handleChange}
-                      placeholder="Enter your email"
-                      readOnly
-                    />
-                  </div>
-                  <div className="mb-3 form-password-toggle">
-                    <div className="d-flex justify-content-between">
-                      <label className="form-label">Password</label>
-                    </div>
-                    <div className="input-group input-group-merge">
+                {step === 0 && (
+                  <>
+                    <div className="mb-3">
+                      <label htmlFor="email" className="form-label">
+                        Email
+                      </label>
                       <input
-                        type={showPassword ? "text" : "password"}
+                        type="text"
                         className="form-control"
+                        name="email"
+                        value={data.email}
                         onChange={handleChange}
-                        value={data.password}
-                        name="password"
-                        placeholder="Enter your Password"
+                        placeholder="Enter your email"
                       />
-                      <span className="input-group-text cursor-pointer">
-                        <i
-                          onClick={() => setShowPassword(!showPassword)}
-                          className={
-                            showPassword ? "bx bx-show" : "bx bx-hide"
-                          }
-                        />
-                      </span>
                     </div>
-                  </div>
-                  <button onClick={handleSubmit} className="btn btn-primary d-grid w-100">
-                    Change Password
-                  </button>
-                </>
+                    <button
+                      onClick={sendOTP}
+                      className="btn btn-primary d-grid w-100"
+                    >
+                      Send OTP
+                    </button>
+                  </>
+                )}
+                {step === 1 && (
+                  <>
+                    <div className="mb-3">
+                      <label className="form-label">Email</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="email"
+                        onChange={handleChange}
+                        value={data.email}
+                        placeholder="Enter your email"
+                        readOnly
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label className="form-label">OTP</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="otp"
+                        onChange={handleChange}
+                        placeholder="Enter OTP Send over your Email"
+                      />
+                    </div>
+                    <button
+                      onClick={verifyOTP}
+                      className="btn btn-primary d-grid w-100"
+                    >
+                      Verify OTP
+                    </button>
+                  </>
+                )}
+                {step === 2 && (
+                  <>
+                    <div className="mb-3">
+                      <label className="form-label">Email</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="email"
+                        value={data.email}
+                        onChange={handleChange}
+                        placeholder="Enter your email"
+                        readOnly
+                      />
+                    </div>
+                    <div className="mb-3 form-password-toggle">
+                      <div className="d-flex justify-content-between">
+                        <label className="form-label">Password</label>
+                      </div>
+                      <div className="input-group input-group-merge">
+                        <input
+                          type={showPassword ? "text" : "password"}
+                          className="form-control"
+                          onChange={handleChange}
+                          value={data.password}
+                          name="password"
+                          placeholder="Enter your Password"
+                        />
+                        <span className="input-group-text cursor-pointer">
+                          <i
+                            onClick={() => setShowPassword(!showPassword)}
+                            className={
+                              showPassword ? "bx bx-show" : "bx bx-hide"
+                            }
+                          />
+                        </span>
+                      </div>
+                    </div>
+                    <button
+                      onClick={handleSubmit}
+                      className="btn btn-primary d-grid w-100"
+                    >
+                      Change Password
+                    </button>
+                  </>
                 )}
               </form>
               <div className="text-center">

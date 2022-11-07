@@ -1,22 +1,20 @@
 import React from "react";
 import axios from "axios";
-import MyVoterCard from "./MyVoterCard";
-import Card from "./Card";
+import NoRecord from "../../../common/NoRecord";
+import MyVoterCard from "./Voter";
 
-export default function ApproveVoters(props) {
-  const [applications, setApplications] = React.useState();
+export default function Voters(props) {
+  const [cards, setCards] = React.useState();
   const [offcanvas, setOffcanvas] = React.useState();
-  const [CMVData, setCMVData] = React.useState();
 
   React.useEffect(() => {
-    axios.get("http://localhost:5000/cmv/retrieveAll").then((res) => {
-      setApplications(res.data.cards);
+    axios.get("http://localhost:5000/cmv/retrieveAllCards").then((res) => {
+      setCards(res.data.cards);
     });
-  }, [applications]);
+  }, [cards]);
 
   return (
     <>
-    <Card data={CMVData} />
       <h4 className="fw-bold py-3 mb-1">
         <span className="text-muted fw-light">Home /</span> Voter
       </h4>
@@ -26,7 +24,7 @@ export default function ApproveVoters(props) {
             <thead>
               <tr>
                 <th>S No.</th>
-                <th>Application No.</th>
+                <th>Voter ID</th>
                 <th>Timestamp</th>
                 <th>Name</th>
                 <th>Details</th>
@@ -34,22 +32,23 @@ export default function ApproveVoters(props) {
               </tr>
             </thead>
             <tbody className="table-border-bottom-0">
-              {applications &&
-                applications.map(
-                  (application, index) =>
-                    application.status === "Approved" && (
-                      <>
-                        <MyVoterCard
-                          key={application._id}
-                          doc={props.doc}
-                          setCMVData={setCMVData}
-                          index={index + 1}
-                          data={application}
-                          setOffcanvas={setOffcanvas}
-                        />
-                      </>
-                    )
-                )}
+              {cards && cards.length > 0 ? (
+                cards.map((application, index) => (
+                  <MyVoterCard
+                    key={application._id}
+                    setGlobal={props.setGlobal}
+                    index={index + 1}
+                    data={application}
+                    setOffcanvas={setOffcanvas}
+                  />
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="6">
+                    <NoRecord />
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

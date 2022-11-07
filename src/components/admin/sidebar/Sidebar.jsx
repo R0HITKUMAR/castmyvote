@@ -27,6 +27,7 @@ export default function Sidebar(props) {
   const Links = [
     { name: "Dashboard", icon: "bx-home-circle", link: "/" },
     { name: "Voters", icon: "bx-user", link: "/voters" },
+    { name: "Applications", icon: "bx-user", link: "/applications" },
     { name: "Elections", icon: "bxs-hand-up", link: "/elections" },
     {
       name: "Actions",
@@ -34,10 +35,9 @@ export default function Sidebar(props) {
       link: "/actions",
       sublinks: [
         { name: "Add Voter", link: "/voters/Add" },
-        { name: "Approve Voters", link: "/voters/Approve" },
         { name: "Add Election", link: "/elections/Add" },
       ],
-    }
+    },
   ];
 
   return (
@@ -95,9 +95,7 @@ export default function Sidebar(props) {
               </li>
             );
           })}
-        <li
-          className="menu-item"
-        >
+        <li className="menu-item">
           <a
             href="javascript:void(0);"
             onClick={() => props.logout()}

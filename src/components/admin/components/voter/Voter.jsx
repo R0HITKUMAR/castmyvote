@@ -1,21 +1,17 @@
 import React from "react";
 
-export default function ApproveVoterCard({ index, data, setOffcanvas }) {
- 
+export default function Voter({ index, data, setOffcanvas, setGlobal }) {
   return (
     <>
       <tr>
         <td>
           <strong>{index}</strong>
         </td>
-        <td>{data.application_no}</td>
-        <td>{data.timestamp}</td>
+        <td>{data.id_no}</td>
+        <td>{data.id_date}</td>
         <td>
           <img src={data.photo} height="30px" alt="Avatar" className="me-2" />
           {data.name}
-        </td>
-        <td>
-          <span className="badge bg-label-primary me-1">{data.status}</span>
         </td>
         <td>
           <button
@@ -25,6 +21,17 @@ export default function ApproveVoterCard({ index, data, setOffcanvas }) {
             data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasEnd"
             aria-controls="offcanvasEnd"
+          >
+            View
+          </button>
+        </td>
+        <td>
+          <button
+            className="btn btn-sm btn-primary"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#attachmentModal"
+            onClick={() => setGlobal({ doc: data.id_doc })}
           >
             View
           </button>

@@ -56,7 +56,7 @@ export default function Register() {
               ...data,
               systemOTP: res.data,
             });
-            setAlert("OTP sent to your email");
+            setAlert("OTP sent to your email & phone");
             setStep(2);
           })
           .catch((err) => {
@@ -133,7 +133,7 @@ export default function Register() {
                         name="phone"
                         onChange={handleChange}
                         value={data.phone}
-                        placeholder="Enter Phone No. with Country Code"
+                        placeholder="Enter Phone No. without Country Code"
                       />
                     </div>
                     <div className="mb-3">

@@ -1,8 +1,6 @@
 import React from "react";
 import axios from "axios";
-import img from "../../../assets/img/icons/registered_voter.png";
-import Swal from "sweetalert2";
-import Card from "./Card";
+import img from "../../../../assets/img/icons/registered_voter.png";
 
 export default function CMV(props) {
   const [data, setData] = React.useState(null);
@@ -17,7 +15,6 @@ export default function CMV(props) {
 
   return (
     <>
-      {data && <Card data={data} />}
       <div className="col-lg-4 mb-4 order-1">
         <div className="card text-center">
           <div className="card-body">

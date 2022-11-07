@@ -1,12 +1,12 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./navbar/Navbar";
-import Intro from "./components/Intro";
-import CMV from "./components/CMV";
-import Application from "./components/Application";
-import NApplication from "./components/NApplication";
-import Form from "./components/Form";
-import Duplicate from "./components/Duplicate";
+import Intro from "./components/home/Intro";
+import CMV from "./components/card/CMV";
+import Application from "./components/application/Application";
+import NApplication from "./components/application/NApplication";
+import Form from "./components/form/Form";
+import Duplicate from "./components/form/Duplicate";
 
 export default function User(props) {
   return (

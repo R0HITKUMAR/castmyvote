@@ -1,5 +1,5 @@
 import React from "react";
-import img from "../../../assets/img/icons/registered_voter.png";
+import img from "../../../../assets/img/icons/registered_voter.png";
 
 export default function Application(props) {
   return (

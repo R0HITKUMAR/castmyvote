@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import img from "../../../assets/img/icons/registered_voter.png"
+import img from "../../../../assets/img/icons/registered_voter.png"
 
 export default function CMV() {
     const navigate = useNavigate();

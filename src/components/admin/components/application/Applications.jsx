@@ -1,16 +1,21 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
-import ApproveVoterCard from "./ApproveVoterCard";
+import NoRecord from "../../../common/NoRecord";
+import ApproveVoterCard from "./Application";
 
-export default function ApproveVoters() {
+export default function Applications(props) {
+  const navigate = useNavigate();
   const [applications, setApplications] = React.useState();
   const [offcanvas, setOffcanvas] = React.useState();
 
   React.useEffect(() => {
-    axios.get("http://localhost:5000/cmv/retrieveAll").then((res) => {
-      setApplications(res.data.cards);
-    });
+    axios
+      .get("http://localhost:5000/cmv/retrieveAllApplications")
+      .then((res) => {
+        setApplications(res.data.cards);
+      });
   }, [applications]);
 
   const approve = (id) => {
@@ -19,11 +24,21 @@ export default function ApproveVoters() {
         id: id,
       })
       .then((res) => {
-        Swal.fire({
-          icon: "success",
-          title: "Approved",
-          text: "Voter has been approved",
-        });
+        if (res.data.status === 0) {
+          Swal.fire({
+            icon: "success",
+            title: "Approved",
+            text:
+              "Voter has been approved with Voter ID: " + res.data.data.id_no,
+          });
+          navigate("/voters");
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Something went wrong",
+          });
+        }
         console.log(res);
       });
   };
@@ -31,7 +46,7 @@ export default function ApproveVoters() {
   return (
     <>
       <h4 className="fw-bold py-3 mb-1">
-        <span className="text-muted fw-light">Home /</span> Approve Voters
+        <span className="text-muted fw-light">Home /</span> Applications
       </h4>
       <div className="card">
         <div className="table-responsive text-nowrap">
@@ -43,24 +58,28 @@ export default function ApproveVoters() {
                 <th>Timestamp</th>
                 <th>Name</th>
                 <th>Status</th>
+                <th>Proof</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody className="table-border-bottom-0">
-              {applications &&
-                applications.map(
-                  (application, index) =>
-                    application.status !== "Approved" && (
-                      <>
-                        <ApproveVoterCard
-                          key={application._id}
-                          index={index + 1}
-                          data={application}
-                          setOffcanvas={setOffcanvas}
-                        />
-                      </>
-                    )
-                )}
+              {applications && applications.length > 0 ? (
+                applications.map((application, index) => (
+                  <ApproveVoterCard
+                    key={application._id}
+                    setGlobal={props.setGlobal}
+                    index={index + 1}
+                    data={application}
+                    setOffcanvas={setOffcanvas}
+                  />
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="6">
+                    <NoRecord />
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

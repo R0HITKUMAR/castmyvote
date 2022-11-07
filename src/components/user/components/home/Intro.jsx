@@ -1,5 +1,5 @@
 import React from 'react';
-import img from "../../../assets/img/illustrations/man-with-laptop-light.png"
+import img from "../../../../assets/img/illustrations/man-with-laptop-light.png"
 
 export default function Welcome(props) {
     return (

@@ -1,20 +1,25 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import AWS from "aws-sdk";
 import Swal from "sweetalert2";
-import img from "../../../assets/img/avatars/1.png";
+import Toast from "../../../common/SweetAlert.js";
+import img from "../../../../assets/img/avatars/1.png";
 
 export default function Form(props) {
   const navigate = useNavigate();
   const [Alert, setAlert] = React.useState("");
   const [avtar, setAvtar] = React.useState(img);
   const [file, setFile] = useState("");
+  const [fileF, setFileF] = useState("");
   const [perc, setPerc] = useState(0);
+  const [percF, setPercF] = useState(0);
 
   const handleFile = (e) => {
     setAvtar(URL.createObjectURL(e.target.files[0]));
     setFile(e.target.files[0]);
+  };
+  const handleFileF = (e) => {
+    setFileF(e.target.files[0]);
   };
 
   const [data, setData] = React.useState({
@@ -26,11 +31,13 @@ export default function Form(props) {
     address: "",
     dob: "",
     photo: "",
+    proof: "",
     application_no: "",
     timestamp: "",
     status: "",
     id_no: "",
     id_date: "",
+    id_doc: "",
   });
 
   const handleChange = (e) => {
@@ -43,55 +50,82 @@ export default function Form(props) {
     });
   };
 
-  const handleFileUpload = (e) => {
+  const handleFileUpload = async (e) => {
     e.preventDefault();
     if (file) {
-      //Setting File Name
-      var timestamp = ((new Date().getTime() / 1000) | 0).toString(16);
-      const filename =
-        timestamp +
-        "xxxxxxxxxxxxxxxx"
-          .replace(/[x]/g, function () {
-            return ((Math.random() * 16) | 0).toString(16);
-          })
-          .toLowerCase() +
-        ".png";
-
-      // Upload file to S3
-      const s3 = new AWS.S3({
-        accessKeyId: process.env.AWS_ACCESS_KEY,
-        secretAccessKey:process.env.AWS_SECRET_KEY,
-        region: "us-east-1",
-      });
-
-      s3.upload({
-        Bucket: "files.rohitkumar",
-        Key: filename,
-        Body: file,
-        ContentType: file.type,
-      })
-        .on("httpUploadProgress", function (evt) {
-          setPerc(parseInt((evt.loaded / evt.total) * 100));
-        })
-        .send(function (err, data) {
-          if (err) {
-            console.log(err);
-          } else {
-            setAvtar(data.Location);
-            setData((prev) => {
-              return {
-                ...prev,
-                photo: data.Location,
-              };
-            });
-          }
+      setPerc(perc + 10);
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("location", "castmyvote/img");
+      setPerc(perc + 20);
+      try {
+        const res = await axios.post(
+          "http://localhost:5000/file/upload",
+          formData
+        );
+        setPerc(100);
+        console.log(res.data.Location);
+        Toast.fire({
+          icon: "success",
+          title: "Image Uploaded Successfully",
         });
+        setData((prev) => {
+          return {
+            ...prev,
+            photo: res.data.Location,
+          };
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      Toast.fire({
+        icon: "error",
+        title: "Please Select a File",
+      });
     }
   };
+
+  const handleFileUploadF = async (e) => {
+    e.preventDefault();
+    if (fileF) {
+      setPercF(percF + 10);
+      const formData = new FormData();
+      formData.append("file", fileF);
+      formData.append("location", "castmyvote/doc");
+      setPercF(percF + 20);
+      try {
+        const res = await axios.post(
+          "http://localhost:5000/file/upload",
+          formData
+        );
+        setPercF(100);
+        console.log(res.data.Location);
+        Toast.fire({
+          icon: "success",
+          title: "Document Uploaded Successfully",
+        });
+        setData((prev) => {
+          return {
+            ...prev,
+            proof: res.data.Location,
+          };
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      Toast.fire({
+        icon: "error",
+        title: "Please Select a File",
+      });
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (document.getElementById("registerterms").checked) {
-      if (data.fName && data.address && data.dob && data.photo) {
+      if (data.fName && data.address && data.dob && data.photo && data.proof) {
         Swal.fire({
           title: "Are you sure?",
           text: "You won't be able to revert this!",
@@ -125,8 +159,17 @@ export default function Form(props) {
               });
           }
         });
+      } else {
+        Toast.fire({
+          icon: "error",
+          title: "Please fill all the fields",
+        });
       }
     } else {
+      Toast.fire({
+        icon: "error",
+        title: "Please Accept Terms and Conditions",
+      });
       setAlert("Please accept the terms and conditions");
     }
   };
@@ -298,6 +341,54 @@ export default function Form(props) {
                       value={data.address}
                       onChange={handleChange}
                     ></textarea>
+                  </div>
+                  <div className="mb-3 col-12 row">
+                    <label htmlFor="address" className="form-label">
+                      Supporting Document
+                    </label>
+                    {!data.proof && (
+                      <div className="col-6">
+                        <div className="input-group">
+                          <input
+                            type="file"
+                            className="form-control"
+                            aria-label="Upload"
+                            onChange={handleFileF}
+                            accept="application/pdf"
+                          />
+                          <button
+                            className="btn btn-primary"
+                            type="button"
+                            onClick={handleFileUploadF}
+                          >
+                            Upload
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                    {!data.proof && (
+                      <div className="col-6">
+                        {percF !== 0 && (
+                          <div className="progress mt-2">
+                            <div
+                              className="progress-bar"
+                              role="progressbar"
+                              style={{ width: `${percF}%` }}
+                              aria-valuenow={percF}
+                              aria-valuemin={0}
+                              aria-valuemax={100}
+                            >
+                              {percF}%
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                    {data.proof && (
+                      <h5 className="card-header" style={{ color: "red" }}>
+                        File Uploaded Successfully
+                      </h5>
+                    )}
                   </div>
                 </div>
               </form>
