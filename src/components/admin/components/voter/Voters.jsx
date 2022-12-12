@@ -10,7 +10,7 @@ export default function Voters(props) {
   const [offcanvas, setOffcanvas] = React.useState();
 
   React.useEffect(() => {
-    axios.get("https://server.castmyvote.ml//cmv/retrieveAllCards").then((res) => {
+    axios.get("https://server.castmyvote.ml/cmv/retrieveAllCards").then((res) => {
       setCards(res.data.cards);
     });
   }, [cards]);

@@ -32,7 +32,7 @@ export default function Login(props) {
       email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)
     ) {
       axios
-        .post("https://server.castmyvote.ml//otp/login", data)
+        .post("https://server.castmyvote.ml/otp/login", data)
         .then((res) => {
           setData({
             ...data,
@@ -53,7 +53,7 @@ export default function Login(props) {
     e.preventDefault();
     if (data.otp.toString() === data.systemOTP.toString()) {
       axios
-        .post("https://server.castmyvote.ml//auth/login", data)
+        .post("https://server.castmyvote.ml/auth/login", data)
         .then((res) => {
           setAlert(res.data.message);
           if (res.data.status === 0) {

@@ -14,7 +14,7 @@ export default function Election() {
 
   React.useEffect(() => {
     axios
-      .get(`https://server.castmyvote.ml//election/retrieveOne/${id}`)
+      .get(`https://server.castmyvote.ml/election/retrieveOne/${id}`)
       .then((res) => {
         setData(res.data.election);
         const len = res.data.election.candidates.length;
@@ -36,7 +36,7 @@ export default function Election() {
       }).then((result) => {
         if (result.isConfirmed) {
           axios
-            .get(`https://server.castmyvote.ml//election/deleteOne/${id}`)
+            .get(`https://server.castmyvote.ml/election/deleteOne/${id}`)
             .then((res) => {
               Swal.fire("Deleted!", res.data.message, "success");
               navigate("/elections");

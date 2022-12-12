@@ -37,7 +37,7 @@ export default function EForm() {
         data.start_date = new Date(data.s_date).toLocaleString();
         data.end_date = new Date(data.e_date).toLocaleString();
         axios
-          .post("https://server.castmyvote.ml//election/add", data)
+          .post("https://server.castmyvote.ml/election/add", data)
           .then((res) => {
             console.log(res.data.election);
             Swal.fire({

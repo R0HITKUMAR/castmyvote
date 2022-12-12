@@ -27,7 +27,7 @@ export default function CView({ info, index }) {
         if (result.isConfirmed) {
           axios
             .get(
-              `https://server.castmyvote.ml//election/${info.election_id}/deleteOneCandidate/${id}`
+              `https://server.castmyvote.ml/election/${info.election_id}/deleteOneCandidate/${id}`
             )
             .then((res) => {
               Swal.fire("Deleted!", res.data.message, "success");

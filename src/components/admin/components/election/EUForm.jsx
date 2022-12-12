@@ -19,7 +19,7 @@ export default function EForm() {
 
   React.useEffect(() => {
     axios
-      .get(`https://server.castmyvote.ml//election/retrieveOne/${id}`)
+      .get(`https://server.castmyvote.ml/election/retrieveOne/${id}`)
       .then((res) => {
         setData(res.data.election);
       })
@@ -50,7 +50,7 @@ export default function EForm() {
       data.end_date
     ) {
       axios
-        .post(`https://server.castmyvote.ml//election/updateOne/${id}`, data)
+        .post(`https://server.castmyvote.ml/election/updateOne/${id}`, data)
         .then((res) => {
           Swal.fire({
             title: "Success!",

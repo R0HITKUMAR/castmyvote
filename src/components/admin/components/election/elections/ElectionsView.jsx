@@ -11,7 +11,7 @@ export default function Elections(props) {
 
   React.useEffect(() => {
     axios
-      .get("https://server.castmyvote.ml//election/retrieveAll")
+      .get("https://server.castmyvote.ml/election/retrieveAll")
       .then((res) => {
         setData(res.data.elections);
       })
@@ -31,7 +31,7 @@ export default function Elections(props) {
       }).then((result) => {
         if (result.isConfirmed) {
           axios
-            .get(`https://server.castmyvote.ml//election/deleteOne/${id}`)
+            .get(`https://server.castmyvote.ml/election/deleteOne/${id}`)
             .then((res) => {
               Swal.fire("Deleted!", res.data.message, "success");
             });

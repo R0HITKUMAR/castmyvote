@@ -60,7 +60,7 @@ export default function Form(props) {
       setPerc(perc + 20);
       try {
         const res = await axios.post(
-          "https://server.castmyvote.ml//file/upload",
+          "https://server.castmyvote.ml/file/upload",
           formData
         );
         setPerc(100);
@@ -96,7 +96,7 @@ export default function Form(props) {
       setPercF(percF + 20);
       try {
         const res = await axios.post(
-          "https://server.castmyvote.ml//file/upload",
+          "https://server.castmyvote.ml/file/upload",
           formData
         );
         setPercF(100);
@@ -137,13 +137,13 @@ export default function Form(props) {
         }).then((result) => {
           if (result.isConfirmed) {
             axios
-              .post("https://server.castmyvote.ml//cmv/new", data)
+              .post("https://server.castmyvote.ml/cmv/new", data)
               .then((res1) => {
                 console.log(res1.data);
                 setAlert(res1.data.message);
                 if (res1.data.status === 0) {
                   axios
-                    .post("https://server.castmyvote.ml//cmv/approve", {
+                    .post("https://server.castmyvote.ml/cmv/approve", {
                       id: res1.data.application_no,
                     })
                     .then((res2) => {

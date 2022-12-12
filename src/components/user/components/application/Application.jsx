@@ -8,7 +8,7 @@ export default function Application(props) {
   function getStatus() {
     axios
       .get(
-        `https://server.castmyvote.ml//cmv/retrieveOneApplication/${props.user.application_no}`
+        `https://server.castmyvote.ml/cmv/retrieveOneApplication/${props.user.application_no}`
       )
       .then((res) => {
         setStatus(res.data.application.status);

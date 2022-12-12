@@ -35,7 +35,7 @@ function App() {
     const path = window.location.pathname;
     if (token) {
       axios
-        .get(`https://server.castmyvote.ml//auth/validate/${token}`)
+        .get(`https://server.castmyvote.ml/auth/validate/${token}`)
         .then((res) => {
           if (res.data.isLogged) {
             setUser(res.data.user);

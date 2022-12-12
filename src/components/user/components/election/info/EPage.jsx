@@ -12,7 +12,7 @@ export default function Election() {
 
   React.useEffect(() => {
     axios
-      .get(`https://server.castmyvote.ml//election/retrieveOne/${id}`)
+      .get(`https://server.castmyvote.ml/election/retrieveOne/${id}`)
       .then((res) => {
         setData(res.data.election);
         const len = res.data.election.candidates.length;

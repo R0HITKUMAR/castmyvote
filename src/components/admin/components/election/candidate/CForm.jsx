@@ -38,7 +38,7 @@ export default function CForm() {
       setPerc(perc + 20);
       try {
         const res = await axios.post(
-          "https://server.castmyvote.ml//file/upload",
+          "https://server.castmyvote.ml/file/upload",
           formData
         );
         setPerc(100);
@@ -74,7 +74,7 @@ export default function CForm() {
       setPerc(perc + 20);
       try {
         const res = await axios.post(
-          "https://server.castmyvote.ml//file/upload",
+          "https://server.castmyvote.ml/file/upload",
           formData
         );
         setPerc(100);
@@ -133,7 +133,7 @@ export default function CForm() {
       data.candidate_address
     ) {
       axios
-        .post(`https://server.castmyvote.ml//election/${id}/addCandidate`, data)
+        .post(`https://server.castmyvote.ml/election/${id}/addCandidate`, data)
         .then((res) => {
           console.log(res);
           Swal.fire({

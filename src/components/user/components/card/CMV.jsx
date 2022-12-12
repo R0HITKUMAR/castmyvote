@@ -7,7 +7,7 @@ export default function CMV(props) {
 
   React.useEffect(() => {
     axios
-      .get(`https://server.castmyvote.ml//cmv/retrieveOne/${props.user.id_no}`)
+      .get(`https://server.castmyvote.ml/cmv/retrieveOne/${props.user.id_no}`)
       .then((res) => {
         setData(res.data.card);
       });

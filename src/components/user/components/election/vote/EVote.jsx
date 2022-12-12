@@ -20,12 +20,12 @@ export default function EVote(props) {
 
   React.useEffect(() => {
     axios
-      .get(`https://server.castmyvote.ml//cmv/retrieveOne/${props.user.id_no}`)
+      .get(`https://server.castmyvote.ml/cmv/retrieveOne/${props.user.id_no}`)
       .then((res) => {
         setCard(res.data.card.elections);
       });
     axios
-      .get(`https://server.castmyvote.ml//election/retrieveOne/${id}`)
+      .get(`https://server.castmyvote.ml/election/retrieveOne/${id}`)
       .then((res) => {
         setData(res.data.election);
       })
@@ -38,7 +38,7 @@ export default function EVote(props) {
       alert("Please select a candidate");
     } else {
       axios
-        .post(`https://server.castmyvote.ml//vote/castVote`, voteLedger)
+        .post(`https://server.castmyvote.ml/vote/castVote`, voteLedger)
         .then((res) => {
           if (res.data.type === "success") {
             Swal.fire({

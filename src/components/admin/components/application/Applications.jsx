@@ -12,7 +12,7 @@ export default function Applications(props) {
 
   React.useEffect(() => {
     axios
-      .get("https://server.castmyvote.ml//cmv/retrieveAllApplications")
+      .get("https://server.castmyvote.ml/cmv/retrieveAllApplications")
       .then((res) => {
         setApplications(res.data.cards);
       });
@@ -20,7 +20,7 @@ export default function Applications(props) {
 
   const approve = (id) => {
     axios
-      .post("https://server.castmyvote.ml//cmv/approve", {
+      .post("https://server.castmyvote.ml/cmv/approve", {
         id: id,
       })
       .then((res) => {

@@ -11,7 +11,7 @@ export default function ElectionShow() {
 
   React.useEffect(() => {
     axios
-      .get("https://server.castmyvote.ml//election/retrieveAll")
+      .get("https://server.castmyvote.ml/election/retrieveAll")
       .then((res) => {
         setElections(res.data.elections);
         setLen(res.data.elections.length);

@@ -10,7 +10,7 @@ export default function EResult() {
   const [winner, setWinner] = React.useState(null);
 
   React.useEffect(() => {
-    axios.get(`https://server.castmyvote.ml//election/${id}/results`)
+    axios.get(`https://server.castmyvote.ml/election/${id}/results`)
       .then(res => {
         setData(res.data.election)
         setWinner(res.data.winner)
