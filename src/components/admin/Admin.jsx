@@ -1,15 +1,28 @@
 import React from "react";
+import axios from "axios";
 import { Routes, Route } from "react-router-dom";
 import Home from "./components/home/Home";
 import Sidebar from "./sidebar/Sidebar";
 import Navbar from "./navbar/Navbar";
 import Applications from "./components/application/Applications";
 import Voters from "./components/voter/Voters";
-import Modal from "./components/single/Modal";
+import Elections from "./components/election/Elections";
+import Form from "./components/application/Form";
+import Modal from "../common/Modal";
+import Stats from "./components/stats/Stats";
 
 export default function Admin(props) {
+  const [count, setCount] = React.useState({
+    applications: 0,
+    voters: 0,
+    elections: 0,
+    upcoming_elections: 0,
+    ongoing_election: 0,
+    completed_elections: 0,
+  });
+
   const [global, setGlobal] = React.useState({
-    doc: "https://s3.amazonaws.com/files.rohitkumar/cmv_id/CMVJEPIQE864-635775cc4168e717fcb0a1f5.pdf",
+    doc: "",
   });
   const hideSidebar = () => {
     document.querySelector("html").classList.remove("layout-menu-expanded");
@@ -18,6 +31,7 @@ export default function Admin(props) {
   return (
     <>
       {global.doc && <Modal global={global} setGlobal={setGlobal} />}
+      <Stats count={count} setCount={setCount} />
       <div className="layout-wrapper layout-content-navbar">
         <div className="layout-container">
           <Sidebar hideSidebar={hideSidebar} logout={props.logout} />
@@ -26,16 +40,26 @@ export default function Admin(props) {
             <div className="content-wrapper">
               <div className="container-xxl flex-grow-1 container-p-y">
                 <Routes>
-                  <Route path="/*" element={<Home />} />
+                  <Route path="/*" element={<Home count={count} />} />
                   <Route
-                    path="/applications"
+                    path="/applications/*"
                     element={
                       <Applications global={global} setGlobal={setGlobal} />
                     }
                   />
                   <Route
-                    path="/voters"
+                    path="/voters/*"
                     element={<Voters global={global} setGlobal={setGlobal} />}
+                  />
+                  <Route
+                    path="/voters/newVoter"
+                    element={<Form global={global} setGlobal={setGlobal} />}
+                  />
+                  <Route
+                    path="/elections/*"
+                    element={
+                      <Elections global={global} setGlobal={setGlobal} />
+                    }
                   />
                 </Routes>
               </div>

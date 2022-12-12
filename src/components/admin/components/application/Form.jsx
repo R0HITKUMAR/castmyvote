@@ -23,11 +23,11 @@ export default function Form(props) {
   };
 
   const [data, setData] = React.useState({
-    name: props.user.name,
-    email: props.user.email,
+    name: "",
+    email: "",
     fName: "",
     gender: "",
-    phone: props.user.phone,
+    phone: "",
     address: "",
     dob: "",
     photo: "",
@@ -138,21 +138,26 @@ export default function Form(props) {
           if (result.isConfirmed) {
             axios
               .post("https://server.castmyvote.ml//cmv/new", data)
-              .then((res) => {
-                setAlert(res.data.message);
-                Swal.fire({
-                  title: "Success!",
-                  text: res.data.message,
-                  icon: "success",
-                  confirmButtonText: "Ok",
-                }).then((result) => {
-                  if (result.isConfirmed) {
-                    navigate("/");
-                    setTimeout(() => {
-                      window.location.reload();
-                    }, 1000);
-                  }
-                });
+              .then((res1) => {
+                console.log(res1.data);
+                setAlert(res1.data.message);
+                if (res1.data.status === 0) {
+                  axios
+                    .post("https://server.castmyvote.ml//cmv/approve", {
+                      id: res1.data.application_no,
+                    })
+                    .then((res2) => {
+                      Swal.fire({
+                        icon: "success",
+                        title: "Approved",
+                        text:
+                          "Voter has been approved with Voter ID: " +
+                          res2.data.id,
+                      });
+                      navigate("/voters");
+                      console.log(res2.data);
+                    });
+                }
               })
               .catch((err) => {
                 console.log(err);
@@ -175,7 +180,7 @@ export default function Form(props) {
   };
 
   return (
-    <div className="container-xxl flex-grow-1 container-p-y">
+    <>
       <h4 className="fw-bold py-3 mb-1">
         <span className="text-muted fw-light">Home /</span> Registration Form
         <button
@@ -257,7 +262,6 @@ export default function Form(props) {
                       placeholder="Enter your full name"
                       value={data.name}
                       onChange={handleChange}
-                      readOnly
                     />
                   </div>
                   <div className="mb-3 col-md-4 col-12">
@@ -293,7 +297,6 @@ export default function Form(props) {
                       placeholder="Enter your email"
                       value={data.email}
                       onChange={handleChange}
-                      readOnly
                     />
                   </div>
                   <div className="mb-3 col-md-4">
@@ -306,9 +309,8 @@ export default function Form(props) {
                         type="text"
                         name="phone"
                         placeholder="Enter your phone number"
-                        value={`IN (+91) - ${data.phone}`}
+                        value={data.phone}
                         onChange={handleChange}
-                        readOnly
                       />
                     </div>
                   </div>
@@ -453,6 +455,6 @@ export default function Form(props) {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

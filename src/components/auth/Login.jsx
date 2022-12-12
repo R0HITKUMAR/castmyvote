@@ -26,15 +26,19 @@ export default function Login(props) {
   const sendOTP = (e) => {
     e.preventDefault();
     const { email, password } = data;
-    if (email !== "" && password !== "" && email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
+    if (
+      email !== "" &&
+      password !== "" &&
+      email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)
+    ) {
       axios
-        .post("http://localhost:5000/otp/login", data)
+        .post("https://server.castmyvote.ml//otp/login", data)
         .then((res) => {
           setData({
             ...data,
             systemOTP: res.data,
           });
-          setAlert("OTP sent to your email");
+          setAlert("OTP sent to your email & phone");
           setStep(1);
         })
         .catch((err) => {
@@ -43,18 +47,18 @@ export default function Login(props) {
     } else {
       setAlert("Please fill all the fields Correctly");
     }
-
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (data.otp.toString() === data.systemOTP.toString()) {
       axios
-        .post("http://localhost:5000/auth/login", data)
+        .post("https://server.castmyvote.ml//auth/login", data)
         .then((res) => {
           setAlert(res.data.message);
           if (res.data.status === 0) {
             localStorage.setItem("token", res.data.token);
+            localStorage.setItem("logoutTime", new Date().getTime() + 900000);
             props.setUser(res.data.user);
             navigate("/");
           }
@@ -65,7 +69,6 @@ export default function Login(props) {
     } else {
       setAlert("Incorrect OTP");
     }
-
   };
 
   return (

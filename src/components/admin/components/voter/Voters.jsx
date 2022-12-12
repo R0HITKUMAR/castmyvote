@@ -1,14 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import NoRecord from "../../../common/NoRecord";
 import MyVoterCard from "./Voter";
 
 export default function Voters(props) {
+  const navigate = useNavigate();
   const [cards, setCards] = React.useState();
   const [offcanvas, setOffcanvas] = React.useState();
 
   React.useEffect(() => {
-    axios.get("http://localhost:5000/cmv/retrieveAllCards").then((res) => {
+    axios.get("https://server.castmyvote.ml//cmv/retrieveAllCards").then((res) => {
       setCards(res.data.cards);
     });
   }, [cards]);
@@ -17,6 +19,22 @@ export default function Voters(props) {
     <>
       <h4 className="fw-bold py-3 mb-1">
         <span className="text-muted fw-light">Home /</span> Voter
+        <button
+          onClick={() => navigate("/")}
+          type="button"
+          class="btn btn-primary btn-sm m-1"
+          style={{ float: "right" }}
+        >
+          <i className="fa-solid fa-house"></i>
+        </button>
+        <button
+          onClick={() => navigate("/voters/newVoter")}
+          type="button"
+          class="btn btn-primary btn-sm m-1"
+          style={{ float: "right" }}
+        >
+          <i className="fa-solid fa-plus m-1"></i> New Voter
+        </button>
       </h4>
       <div className="card">
         <div className="table-responsive text-nowrap">
@@ -117,6 +135,17 @@ export default function Voters(props) {
                       <p>{offcanvas.timestamp}</p>
                     </dd>
                   </dl>
+                  <button
+                    className="btn btn-sm btn-primary"
+                    type="button"
+                    data-bs-dismiss="offcanvas"
+                    data-bs-toggle="modal"
+                    data-bs-target="#attachmentModal"
+                    
+                    onClick={() => props.setGlobal({ doc: offcanvas.proof })}
+                  >
+                    <i className="fa-solid fa-eye" /> View Attachment
+                  </button>
                 </p>
               </div>
             </div>

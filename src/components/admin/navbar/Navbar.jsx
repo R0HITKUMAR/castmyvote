@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar(props) {
+  const navigate = useNavigate();
   const [profileOpen, setProfileOpen] = React.useState(false);
 
   const showSidebar = () => {
@@ -25,6 +27,7 @@ export default function Navbar(props) {
           <div className="nav-item d-flex align-items-center"></div>
         </div>
         <ul className="navbar-nav flex-row align-items-center ms-auto">
+
           <li className="nav-item navbar-dropdown dropdown-user dropdown">
             <a
               className="nav-link dropdown-toggle hide-arrow"
@@ -80,15 +83,21 @@ export default function Navbar(props) {
             <div className="dropdown-divider" />
           </li>
           <li>
-            <a className="dropdown-item" href="#">
+            <a className="dropdown-item" href="javascript:void(0)" onClick={() => navigate("/")}>
               <i className="bx bx-user me-2" />
-              <span className="align-middle">My Profile</span>
+              <span className="align-middle">Dashboard</span>
             </a>
           </li>
           <li>
-            <a className="dropdown-item" href="#">
-              <i className="bx bx-cog me-2" />
-              <span className="align-middle">Settings</span>
+            <a className="dropdown-item" href="javascript:void(0)" onClick={() => navigate("/elections")}>
+              <i className="bx fa-solid bxs-hand-up me-2" />
+              <span className="align-middle">Elections</span>
+            </a>
+          </li>
+          <li>
+            <a className="dropdown-item" href="javascript:void(0)" onClick={() => navigate("/voters")}>
+              <i className="bx bx-user me-2" />
+              <span className="align-middle">Voters</span>
             </a>
           </li>
           <li>

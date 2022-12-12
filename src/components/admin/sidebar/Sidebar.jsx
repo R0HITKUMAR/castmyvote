@@ -34,8 +34,8 @@ export default function Sidebar(props) {
       icon: "bx-cog",
       link: "/actions",
       sublinks: [
-        { name: "Add Voter", link: "/voters/Add" },
-        { name: "Add Election", link: "/elections/Add" },
+        { name: "Add Voter", link: "/voters/newVoter" },
+        { name: "Add Election", link: "/elections/addElection" },
       ],
     },
   ];

@@ -12,7 +12,7 @@ export default function Applications(props) {
 
   React.useEffect(() => {
     axios
-      .get("http://localhost:5000/cmv/retrieveAllApplications")
+      .get("https://server.castmyvote.ml//cmv/retrieveAllApplications")
       .then((res) => {
         setApplications(res.data.cards);
       });
@@ -20,7 +20,7 @@ export default function Applications(props) {
 
   const approve = (id) => {
     axios
-      .post("http://localhost:5000/cmv/approve", {
+      .post("https://server.castmyvote.ml//cmv/approve", {
         id: id,
       })
       .then((res) => {
@@ -47,6 +47,22 @@ export default function Applications(props) {
     <>
       <h4 className="fw-bold py-3 mb-1">
         <span className="text-muted fw-light">Home /</span> Applications
+        <button
+          onClick={() => navigate("/")}
+          type="button"
+          class="btn btn-primary btn-sm m-1"
+          style={{ float: "right" }}
+        >
+          <i className="fa-solid fa-house"></i>
+        </button>
+        <button
+          onClick={() => navigate("/voters/newVoter")}
+          type="button"
+          class="btn btn-primary btn-sm m-1"
+          style={{ float: "right" }}
+        >
+          <i className="fa-solid fa-plus m-1"></i> New Voter
+        </button>
       </h4>
       <div className="card">
         <div className="table-responsive text-nowrap">
@@ -146,7 +162,7 @@ export default function Applications(props) {
 
               <button
                 type="button"
-                onClick={() => approve(offcanvas._id)}
+                onClick={() => approve(offcanvas.application_no)}
                 className="btn btn-primary mb-2 d-grid w-100"
               >
                 Approve

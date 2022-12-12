@@ -4,10 +4,10 @@ import img from "../../../../assets/img/icons/registered_voter.png"
 
 export default function CMV() {
     const navigate = useNavigate();
-    
+
     return (
-        <div className="col-lg-4 mb-4 order-1">
-            <div className="card text-center">
+        <div className="col-12">
+            <div className="card text-center" style={{ height: "200px" }}>
                 <div className="card-body">
                     <div className="card-title d-flex align-items-start justify-content-center">
                         <div className="avatar flex-shrink-0">

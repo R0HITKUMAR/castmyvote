@@ -27,7 +27,7 @@ export default function Reset() {
     e.preventDefault();
     if (data.email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
       axios
-        .post("http://localhost:5000/otp/reset", data)
+        .post("https://server.castmyvote.ml//otp/reset", data)
         .then((res) => {
           setData({
             ...data,
@@ -58,7 +58,7 @@ export default function Reset() {
     e.preventDefault();
     if (step === 2) {
       axios
-        .post("http://localhost:5000/auth/reset", data)
+        .post("https://server.castmyvote.ml//auth/reset", data)
         .then((res) => {
           setAlert(res.data.message);
           if (res.data.success === true) {

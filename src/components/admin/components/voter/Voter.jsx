@@ -22,7 +22,7 @@ export default function Voter({ index, data, setOffcanvas, setGlobal }) {
             data-bs-target="#offcanvasEnd"
             aria-controls="offcanvasEnd"
           >
-            View
+            <i className="fa-solid fa-eye" /> View
           </button>
         </td>
         <td>
@@ -32,8 +32,9 @@ export default function Voter({ index, data, setOffcanvas, setGlobal }) {
             data-bs-toggle="modal"
             data-bs-target="#attachmentModal"
             onClick={() => setGlobal({ doc: data.id_doc })}
+            disabled={data.id_doc === "" ? true : false}
           >
-            View
+            <i className="fa-solid fa-eye" /> View
           </button>
         </td>
       </tr>
