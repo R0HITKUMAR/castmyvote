@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import axios from "../common/axios.js";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/img/logo/logo.svg";
 
@@ -50,7 +50,7 @@ export default function Register() {
     if (data.password === data.repassword) {
       if (data.password.length >= 6) {
         axios
-          .post("https://server.castmyvote.ml/otp/NewUser", data)
+          .post("/otp/NewUser", data)
           .then((res) => {
             setData({
               ...data,
@@ -75,7 +75,7 @@ export default function Register() {
     if (document.getElementById("terms").checked) {
       if (data.otp.toString() === data.systemOTP.toString()) {
         axios
-          .post("https://server.castmyvote.ml/auth/register", data)
+          .post("/auth/register", data)
           .then((res) => {
             setAlert(res.data.message);
             setStep(0);

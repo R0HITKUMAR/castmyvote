@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import axios from "../../../../common/axios.js";
 import { useParams, useNavigate, Route, Routes } from "react-router-dom";
 import Swal from "sweetalert2";
 import CView from "../candidate/CView";
@@ -14,7 +14,7 @@ export default function Election() {
 
   React.useEffect(() => {
     axios
-      .get(`https://server.castmyvote.ml/election/retrieveOne/${id}`)
+      .get(`/election/retrieveOne/${id}`)
       .then((res) => {
         setData(res.data.election);
         const len = res.data.election.candidates.length;
@@ -36,7 +36,7 @@ export default function Election() {
       }).then((result) => {
         if (result.isConfirmed) {
           axios
-            .get(`https://server.castmyvote.ml/election/deleteOne/${id}`)
+            .get(`/election/deleteOne/${id}`)
             .then((res) => {
               Swal.fire("Deleted!", res.data.message, "success");
               navigate("/elections");

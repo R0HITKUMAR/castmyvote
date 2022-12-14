@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../../../common/axios.js";
 import React from "react";
 import Swal from "sweetalert2";
 
@@ -27,7 +27,7 @@ export default function CView({ info, index }) {
         if (result.isConfirmed) {
           axios
             .get(
-              `https://server.castmyvote.ml/election/${info.election_id}/deleteOneCandidate/${id}`
+              `/election/${info.election_id}/deleteOneCandidate/${id}`
             )
             .then((res) => {
               Swal.fire("Deleted!", res.data.message, "success");

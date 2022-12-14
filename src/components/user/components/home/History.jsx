@@ -8,7 +8,7 @@ export default function History({ user }) {
 
     React.useEffect(() => {
         axios
-            .get(`https://server.castmyvote.ml/cmv/retrieveOne/${user.id_no}`)
+            .get(`/cmv/retrieveOne/${user.id_no}`)
             .then((res) => {
                 setData(res.data.card.elections.reverse());
             });

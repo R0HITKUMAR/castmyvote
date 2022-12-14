@@ -5,27 +5,27 @@ import Logo from "../../../assets/img/logo/logo.svg";
 export default function Navbar(props) {
   const navigate = useNavigate();
   const [profileOpen, setProfileOpen] = React.useState(false);
-  const [logoutTime, setLogoutTime] = React.useState("");
+  // const [logoutTime, setLogoutTime] = React.useState("");
 
   // Load the time countdown
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      const logouttime = localStorage.getItem("logoutTime");
-      // Calculate the time remaining
-      const timeLeft = logouttime - new Date().getTime();
-      // Convert the time remaining to minutes and seconds
-      const minutes = Math.floor((timeLeft / 1000 / 60) % 60);
-      const seconds = Math.floor((timeLeft / 1000) % 60);
-      // Display the time remaining
-      setLogoutTime(`${minutes}:${seconds} mins`);
-      if (timeLeft < 0) {
-        localStorage.removeItem("token");
-        localStorage.removeItem("logoutTime");
-        window.location.reload();
-      }
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [logoutTime]);
+  // React.useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     const logouttime = localStorage.getItem("logoutTime");
+  //     // Calculate the time remaining
+  //     const timeLeft = logouttime - new Date().getTime();
+  //     // Convert the time remaining to minutes and seconds
+  //     const minutes = Math.floor((timeLeft / 1000 / 60) % 60);
+  //     const seconds = Math.floor((timeLeft / 1000) % 60);
+  //     // Display the time remaining
+  //     setLogoutTime(`${minutes}:${seconds} mins`);
+  //     if (timeLeft < 0) {
+  //       localStorage.removeItem("token");
+  //       localStorage.removeItem("logoutTime");
+  //       window.location.reload();
+  //     }
+  //   }, 1000);
+  //   return () => clearInterval(interval);
+  // }, [logoutTime]);
 
   return (
     <nav
@@ -44,7 +44,7 @@ export default function Navbar(props) {
         />
         <ul className="navbar-nav flex-row align-items-center ms-auto">
           <span className="text-danger mr-2">
-            Lime Left: <b>{logoutTime}</b>
+            {/* Lime Left: <b>{logoutTime}</b> */}
           </span>
           <li className="nav-item navbar-dropdown dropdown-user dropdown">
             <a

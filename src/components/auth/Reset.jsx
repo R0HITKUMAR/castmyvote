@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import axios from "../common/axios.js";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/img/logo/logo.svg";
 
@@ -27,7 +27,7 @@ export default function Reset() {
     e.preventDefault();
     if (data.email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
       axios
-        .post("https://server.castmyvote.ml/otp/reset", data)
+        .post("/otp/reset", data)
         .then((res) => {
           setData({
             ...data,
@@ -58,7 +58,7 @@ export default function Reset() {
     e.preventDefault();
     if (step === 2) {
       axios
-        .post("https://server.castmyvote.ml/auth/reset", data)
+        .post("/auth/reset", data)
         .then((res) => {
           setAlert(res.data.message);
           if (res.data.success === true) {

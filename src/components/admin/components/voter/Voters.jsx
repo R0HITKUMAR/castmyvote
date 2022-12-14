@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../../../common/axios.js";
 import NoRecord from "../../../common/NoRecord";
 import MyVoterCard from "./Voter";
 
@@ -10,7 +10,7 @@ export default function Voters(props) {
   const [offcanvas, setOffcanvas] = React.useState();
 
   React.useEffect(() => {
-    axios.get("https://server.castmyvote.ml/cmv/retrieveAllCards").then((res) => {
+    axios.get("/cmv/retrieveAllCards").then((res) => {
       setCards(res.data.cards);
     });
   }, [cards]);

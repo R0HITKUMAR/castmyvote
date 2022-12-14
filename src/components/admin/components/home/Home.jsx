@@ -10,7 +10,6 @@ export default function Home({ count }) {
     <div className="row">
       <div className="col-lg-8 col-md-8 col-12">
         <Welcome />
-        <br />
         <ElectionShow />
       </div>
       <div className="col-lg-4 col-md-4">

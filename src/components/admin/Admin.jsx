@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import axios from "../common/axios.js";
 import { Routes, Route } from "react-router-dom";
 import Home from "./components/home/Home";
 import Sidebar from "./sidebar/Sidebar";

@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import axios from "../../../../common/axios.js";
 import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Toast from "../../../../common/SweetAlert";
@@ -38,7 +38,7 @@ export default function CForm() {
       setPerc(perc + 20);
       try {
         const res = await axios.post(
-          "https://server.castmyvote.ml/file/upload",
+          "/file/upload",
           formData
         );
         setPerc(100);
@@ -74,7 +74,7 @@ export default function CForm() {
       setPerc(perc + 20);
       try {
         const res = await axios.post(
-          "https://server.castmyvote.ml/file/upload",
+          "/file/upload",
           formData
         );
         setPerc(100);
@@ -133,7 +133,7 @@ export default function CForm() {
       data.candidate_address
     ) {
       axios
-        .post(`https://server.castmyvote.ml/election/${id}/addCandidate`, data)
+        .post(`/election/${id}/addCandidate`, data)
         .then((res) => {
           console.log(res);
           Swal.fire({

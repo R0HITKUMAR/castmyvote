@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import axios from "../../../common/axios.js";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
@@ -37,7 +37,7 @@ export default function EForm() {
         data.start_date = new Date(data.s_date).toLocaleString();
         data.end_date = new Date(data.e_date).toLocaleString();
         axios
-          .post("https://server.castmyvote.ml/election/add", data)
+          .post("/election/add", data)
           .then((res) => {
             console.log(res.data.election);
             Swal.fire({

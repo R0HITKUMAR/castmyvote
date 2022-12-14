@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axios from "../../../common/axios.js";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Toast from "../../../common/SweetAlert.js";
@@ -60,7 +60,7 @@ export default function Form(props) {
       setPerc(perc + 20);
       try {
         const res = await axios.post(
-          "https://server.castmyvote.ml/file/upload",
+          "/file/upload",
           formData
         );
         setPerc(100);
@@ -96,7 +96,7 @@ export default function Form(props) {
       setPercF(percF + 20);
       try {
         const res = await axios.post(
-          "https://server.castmyvote.ml/file/upload",
+          "/file/upload",
           formData
         );
         setPercF(100);
@@ -137,7 +137,7 @@ export default function Form(props) {
         }).then((result) => {
           if (result.isConfirmed) {
             axios
-              .post("https://server.castmyvote.ml/cmv/new", data)
+              .post("/cmv/new", data)
               .then((res) => {
                 setAlert(res.data.message);
                 Swal.fire({

@@ -3,7 +3,7 @@ import img from "../../../../assets/img/illustrations/man-with-laptop-light.png"
 
 export default function Welcome() {
   return (
-    <div className="col-12">
+    <div className="col-12 mb-3">
       <div className="card">
         <div className="d-flex align-items-end row">
           <div className="col-sm-8">

@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import axios from "../../../../common/axios.js";
 import NoRecord from "../../../../common/NoRecord";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -11,7 +11,7 @@ export default function Elections(props) {
 
   React.useEffect(() => {
     axios
-      .get("https://server.castmyvote.ml/election/retrieveAll")
+      .get("/election/retrieveAll")
       .then((res) => {
         setData(res.data.elections);
       })
@@ -31,7 +31,7 @@ export default function Elections(props) {
       }).then((result) => {
         if (result.isConfirmed) {
           axios
-            .get(`https://server.castmyvote.ml/election/deleteOne/${id}`)
+            .get(`/election/deleteOne/${id}`)
             .then((res) => {
               Swal.fire("Deleted!", res.data.message, "success");
             });

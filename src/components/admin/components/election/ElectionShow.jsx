@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import axios from "../../../common/axios.js";
 import { useNavigate } from "react-router-dom";
 
 export default function ElectionShow() {
@@ -11,7 +11,7 @@ export default function ElectionShow() {
 
   React.useEffect(() => {
     axios
-      .get("https://server.castmyvote.ml/election/retrieveAll")
+      .get("/election/retrieveAll")
       .then((res) => {
         setElections(res.data.elections);
         setLen(res.data.elections.length);
@@ -36,7 +36,7 @@ export default function ElectionShow() {
     }
   }
   return (
-    <div className="col-12">
+    <div className="col-12 mb-3">
       <div className="card">
         <h5 className="card-header pb-1">
           Elections Show

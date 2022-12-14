@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import axios from "../common/axios.js";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/img/logo/logo.svg";
 
@@ -32,7 +32,7 @@ export default function Login(props) {
       email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)
     ) {
       axios
-        .post("https://server.castmyvote.ml/otp/login", data)
+        .post("/otp/login", data)
         .then((res) => {
           setData({
             ...data,
@@ -53,7 +53,7 @@ export default function Login(props) {
     e.preventDefault();
     if (data.otp.toString() === data.systemOTP.toString()) {
       axios
-        .post("https://server.castmyvote.ml/auth/login", data)
+        .post("/auth/login", data)
         .then((res) => {
           setAlert(res.data.message);
           if (res.data.status === 0) {

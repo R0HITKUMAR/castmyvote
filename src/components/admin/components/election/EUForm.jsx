@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import axios from "../../../common/axios.js";
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -19,7 +19,7 @@ export default function EForm() {
 
   React.useEffect(() => {
     axios
-      .get(`https://server.castmyvote.ml/election/retrieveOne/${id}`)
+      .get(`/election/retrieveOne/${id}`)
       .then((res) => {
         setData(res.data.election);
       })
@@ -50,7 +50,7 @@ export default function EForm() {
       data.end_date
     ) {
       axios
-        .post(`https://server.castmyvote.ml/election/updateOne/${id}`, data)
+        .post(`/election/updateOne/${id}`, data)
         .then((res) => {
           Swal.fire({
             title: "Success!",

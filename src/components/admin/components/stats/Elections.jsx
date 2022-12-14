@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Elections({ num }) {
   return (
-    <div className="col-md-12 col-6 mb-4">
+    <div className="col-md-12 mb-4">
       <div className="card h-100">
         <div className="card-header d-flex align-items-center justify-content-between pb-0">
           <div className="card-title mb-0">

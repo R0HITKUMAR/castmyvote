@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import axios from "../../../common/axios.js";
 import img from "../../../../assets/img/icons/registered_voter.png";
 
 export default function Application(props) {
@@ -8,7 +8,7 @@ export default function Application(props) {
   function getStatus() {
     axios
       .get(
-        `https://server.castmyvote.ml/cmv/retrieveOneApplication/${props.user.application_no}`
+        `/cmv/retrieveOneApplication/${props.user.application_no}`
       )
       .then((res) => {
         setStatus(res.data.application.status);

@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "./components/common/axios.js";
 import Swal from "sweetalert2";
 import Main from "./components/main/Main";
 import Login from "./components/auth/Login";
@@ -35,7 +35,7 @@ function App() {
     const path = window.location.pathname;
     if (token) {
       axios
-        .get(`https://server.castmyvote.ml/auth/validate/${token}`)
+        .get(`/auth/validate/${token}`)
         .then((res) => {
           if (res.data.isLogged) {
             setUser(res.data.user);

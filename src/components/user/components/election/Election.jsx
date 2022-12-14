@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../../../common/axios.js";
 import LiveElections from "./LiveElections";
 import UpcomingElections from "./UpcomingElections";
 import PastElections from "./CompletedElection";
@@ -15,7 +15,7 @@ export default function Election() {
   });
 
   React.useEffect(() => {
-    axios.get("https://server.castmyvote.ml/election/retrieveAll").then((res) => {
+    axios.get("/election/retrieveAll").then((res) => {
       setElections(res.data.elections);
       const live = res.data.elections.filter(
         (election) => election.status === "Live"

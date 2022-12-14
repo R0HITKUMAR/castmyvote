@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import axios from "axios";
+import axios from "../../../common/axios.js";
 import NoRecord from "../../../common/NoRecord";
 import ApproveVoterCard from "./Application";
 
@@ -12,7 +12,7 @@ export default function Applications(props) {
 
   React.useEffect(() => {
     axios
-      .get("https://server.castmyvote.ml/cmv/retrieveAllApplications")
+      .get("/cmv/retrieveAllApplications")
       .then((res) => {
         setApplications(res.data.cards);
       });
@@ -20,7 +20,7 @@ export default function Applications(props) {
 
   const approve = (id) => {
     axios
-      .post("https://server.castmyvote.ml/cmv/approve", {
+      .post("/cmv/approve", {
         id: id,
       })
       .then((res) => {
