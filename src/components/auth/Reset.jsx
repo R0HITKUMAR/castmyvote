@@ -3,7 +3,7 @@ import axios from "../common/axios.js";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/img/logo/logo.svg";
 
-export default function Reset() {
+export default function Reset(props) {
   const navigate = useNavigate();
   const [alert, setAlert] = React.useState("");
   const [step, setStep] = React.useState(0);
@@ -91,6 +91,7 @@ export default function Reset() {
                   height={"100px"}
                 />
               </div>
+              {props.global.s_status ? <span className="badge bg-label-primary">• Live</span> : <span class="badge bg-label-dark">• Offline</span>}
               <h4 className="mb-2">Forgot Password? 🔒</h4>
               <p className="mb-4">
                 Enter your email and we'll send you OTP to reset your password
@@ -117,6 +118,7 @@ export default function Reset() {
                     <button
                       onClick={sendOTP}
                       className="btn btn-primary d-grid w-100"
+                      disabled={props.global.s_status ? false : true}
                     >
                       Send OTP
                     </button>

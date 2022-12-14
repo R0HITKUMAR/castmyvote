@@ -66,9 +66,9 @@ export default function Election() {
         >
           <i className="fa-solid fa-backward"></i>
         </button>
-      </h4>
+      </h4><br />
       <div className="row" style={{ overflow: "hidden" }}>
-        <div className="col-6">
+        <div className="col-md-6 col-12">
           <div
             className="card mb-4"
             style={{
@@ -141,7 +141,7 @@ export default function Election() {
             </div>
           </div>
         </div>
-        <div className="col-6" style={{ height: "350px", overflow: "scroll" }}>
+        <div className="col-md-6 col-12" style={{ height: "350px", overflow: "scroll" }}>
           <Routes>
             <Route
               path="/*"

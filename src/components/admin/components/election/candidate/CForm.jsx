@@ -175,7 +175,7 @@ export default function CForm() {
         ) : null}
         <form>
           <div className="row mb-3">
-            <div className="col-3 text-center">
+            <div className="col-md-3 col-12 text-center">
               <center>
                 <div className="user-img p-1">
                   <label>
@@ -183,8 +183,8 @@ export default function CForm() {
                       src={data.candidate_dp || images.image}
                       alt="user-avatar"
                       className="d-block rounded"
-                      width={100}
-                      height={100}
+                      width={90}
+                      height={90}
                     />
                     <input
                       type="file"
@@ -211,8 +211,8 @@ export default function CForm() {
                       src={data.candidate_logo || images.logo}
                       alt="user-avatar"
                       className="d-block rounded"
-                      width={100}
-                      height={100}
+                      width={90}
+                      height={90}
                     />
 
                     <input
@@ -236,7 +236,7 @@ export default function CForm() {
                 </div>
               </center>
             </div>
-            <div className="col-9">
+            <div className="col-md-9 col-12">
               <label className="col-form-label">Fullname</label>
               <div className="input-group input-group-merge">
                 <span className="input-group-text">

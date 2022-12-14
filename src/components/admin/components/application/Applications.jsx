@@ -64,7 +64,7 @@ export default function Applications(props) {
           <i className="fa-solid fa-plus m-1"></i> New Voter
         </button>
       </h4>
-      <div className="card">
+      <div className="card col-12">
         <div className="table-responsive text-nowrap">
           <table className="table">
             <thead>

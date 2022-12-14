@@ -41,7 +41,7 @@ export default function ElectionShow() {
         <h5 className="card-header pb-1">
           Elections Show
           <div style={{ float: "right" }}>
-            <button className="btn btn-primary btn-sm m-1">
+            <button onClick={() => navigate("/elections/addElection")} className="btn btn-primary btn-sm m-1">
               <i className="fa-solid fa-plus" /> Add Election
             </button>
           </div>

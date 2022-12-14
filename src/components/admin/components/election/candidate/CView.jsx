@@ -45,64 +45,65 @@ export default function CView({ info, index }) {
       {info.candidates &&
         info.candidates.map((item, index) => {
           return (
-            <div className="card mb-2" key={index}>
-              <div className="row p-1">
-                <div className="col-md-2">
-                  <img
-                    src={item.candidate_dp}
-                    alt="Candidate"
-                    className="d-block rounded"
-                    width={100}
-                    height={100}
-                  />
-                </div>
-                <div className="col-md-7 p-1">
-                  <div className="text-center">
-                    <span>{item.candidate_id}</span>
-                    <h5>
-                      {item.candidate_name}
-                      <br />
-                      <small>({item.candidate_party})</small>
-                    </h5>
-                    <i
-                      className={
-                        sendColId === item.candidate_id
-                          ? "fa-solid fa-chevron-up"
-                          : "fa-solid fa-chevron-down"
-                      }
-                      style={{ cursor: "pointer" }}
-                      onClick={() => handleexpand(item.candidate_id)}
+            <div className="row">
+              <div className="card mb-2" key={index}>
+                <div className="row p-1">
+                  <div className="col-md-2 col-6">
+                    <img
+                      src={item.candidate_dp}
+                      alt="Candidate"
+                      className="d-block rounded"
+                      width={100}
+                      height={100}
+                    />
+                  </div>
+                  <div className="col-md-7 col-5 p-1">
+                    <div className="text-center">
+                      <span>{item.candidate_id}</span>
+                      <h5>
+                        {item.candidate_name}
+                        <br />
+                        <small>({item.candidate_party})</small>
+                      </h5>
+                      <i
+                        className={
+                          sendColId === item.candidate_id
+                            ? "fa-solid fa-chevron-up"
+                            : "fa-solid fa-chevron-down"
+                        }
+                        style={{ cursor: "pointer" }}
+                        onClick={() => handleexpand(item.candidate_id)}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-md-3">
+                    <img
+                      src={item.candidate_logo}
+                      alt="Logo"
+                      className="d-block rounded"
+                      width={100}
+                      height={100}
                     />
                   </div>
                 </div>
-                <div className="col-md-2">
-                  <img
-                    src={item.candidate_logo}
-                    alt="Logo"
-                    className="d-block rounded"
-                    width={100}
-                    height={100}
-                  />
-                </div>
-              </div>
-              {sendColId === item.candidate_id && (
-                <div className="text-center">
-                  <p>
-                    {item.candidate_address}
-                    <br />
-                    {item.candidate_email} | Phone : {item.candidate_phone}
-                    <br />
-                    {info.status === "Upcoming" && (
-                      <i
-                        onClick={() => deleteCandidate(item.candidate_id)}
-                        className="fa-solid fa-trash"
-                        style={{ cursor: "pointer" }}
-                      ></i>
-                    )}
-                  </p>
-                </div>
-              )}
-            </div>
+                {sendColId === item.candidate_id && (
+                  <div className="text-center">
+                    <p>
+                      {item.candidate_address}
+                      <br />
+                      {item.candidate_email} | Phone : {item.candidate_phone}
+                      <br />
+                      {info.status === "Upcoming" && (
+                        <i
+                          onClick={() => deleteCandidate(item.candidate_id)}
+                          className="fa-solid fa-trash"
+                          style={{ cursor: "pointer" }}
+                        ></i>
+                      )}
+                    </p>
+                  </div>
+                )}
+              </div></div>
           );
         })}
     </>

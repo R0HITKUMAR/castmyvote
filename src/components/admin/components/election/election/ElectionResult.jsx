@@ -38,7 +38,7 @@ export default function ElectionResult() {
                 </button>
             </h4>
             <div className="row">
-                <div className="col-6">
+                <div className="col-md-6 col-12">
                     <div className="card mb-3">
                         <div className="card-body">
                             <span className="fw-semibold d-block mb-1 text-center">Election Details</span>
@@ -86,7 +86,7 @@ export default function ElectionResult() {
 
                     </div>
                 </div>
-                <div className="col-6">
+                <div className="col-md-6 col-12">
                     <div className="row justify-content-center">
                         {winner && winner.map((winner, index) => {
                             return (

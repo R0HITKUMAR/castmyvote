@@ -12,6 +12,10 @@ import User from "./components/user/User";
 function App() {
   const navigate = useNavigate();
   const [user, setUser] = React.useState([]);
+  const [global, setGlobal] = React.useState({
+    doc: "",
+    s_status: false,
+  });
 
   async function logout() {
     Swal.fire({
@@ -33,6 +37,13 @@ function App() {
   React.useEffect(() => {
     const token = localStorage.getItem("token");
     const path = window.location.pathname;
+    axios.get("/").then((res) => {
+      if (res.data.live === true) {
+        setGlobal({ ...global, s_status: true });
+      } else {
+        // navigate("/");
+      }
+    });
     if (token) {
       axios
         .get(`/auth/validate/${token}`)
@@ -61,7 +72,7 @@ function App() {
         })
         .catch((err) => console.log(err));
     }
-  }, []);
+  }, [global.s_status]);
 
   return (
     <Routes>
@@ -71,18 +82,32 @@ function App() {
         element={
           <>
             {user.length === 0 ? (
-              <Main setUser={setUser} />
+              <Main setUser={setUser} global={global} />
             ) : user.role === "admin" ? (
-              <Admin user={user} logout={logout} />
+              <Admin
+                user={user}
+                logout={logout}
+                setGlobal={setGlobal}
+                global={global}
+              />
             ) : (
-              <User user={user} logout={logout} />
+              <User
+                user={user}
+                logout={logout}
+                setGlobal={setGlobal}
+                global={global}
+              />
             )}
           </>
         }
       />
-      <Route exact path="/login" element={<Login setUser={setUser} />} />
-      <Route exact path="/register" element={<Register />} />
-      <Route exact path="/reset" element={<Reset />} />
+      <Route
+        exact
+        path="/login"
+        element={<Login setUser={setUser} global={global} />}
+      />
+      <Route exact path="/register" element={<Register global={global} />} />
+      <Route exact path="/reset" element={<Reset global={global} />} />
     </Routes>
   );
 }

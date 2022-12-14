@@ -21,22 +21,20 @@ export default function Admin(props) {
     completed_elections: 0,
   });
 
-  const [global, setGlobal] = React.useState({
-    doc: "",
-  });
+
   const hideSidebar = () => {
     document.querySelector("html").classList.remove("layout-menu-expanded");
   };
 
   return (
     <>
-      {global.doc && <Modal global={global} setGlobal={setGlobal} />}
+      {props.global.doc && <Modal global={props.global} setGlobal={props.setGlobal} />}
       <Stats count={count} setCount={setCount} />
       <div className="layout-wrapper layout-content-navbar">
         <div className="layout-container">
           <Sidebar hideSidebar={hideSidebar} logout={props.logout} />
           <div className="layout-page">
-            <Navbar logout={props.logout} />
+            <Navbar logout={props.logout} global={props.global} />
             <div className="content-wrapper">
               <div className="container-xxl flex-grow-1 container-p-y">
                 <Routes>
@@ -44,21 +42,21 @@ export default function Admin(props) {
                   <Route
                     path="/applications/*"
                     element={
-                      <Applications global={global} setGlobal={setGlobal} />
+                      <Applications global={props.global} setGlobal={props.setGlobal} />
                     }
                   />
                   <Route
                     path="/voters/*"
-                    element={<Voters global={global} setGlobal={setGlobal} />}
+                    element={<Voters global={props.global} setGlobal={props.setGlobal} />}
                   />
                   <Route
                     path="/voters/newVoter"
-                    element={<Form global={global} setGlobal={setGlobal} />}
+                    element={<Form global={props.global} setGlobal={props.setGlobal} />}
                   />
                   <Route
                     path="/elections/*"
                     element={
-                      <Elections global={global} setGlobal={setGlobal} />
+                      <Elections global={props.global} setGlobal={props.setGlobal} />
                     }
                   />
                 </Routes>

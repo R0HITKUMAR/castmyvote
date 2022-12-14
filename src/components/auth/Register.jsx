@@ -3,7 +3,7 @@ import axios from "../common/axios.js";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/img/logo/logo.svg";
 
-export default function Register() {
+export default function Register(props) {
   const navigate = useNavigate();
   const [showPassword1, setShowPassword1] = React.useState(false);
   const [showPassword2, setShowPassword2] = React.useState(false);
@@ -106,6 +106,7 @@ export default function Register() {
                   height={"100px"}
                 />
               </div>
+              {props.global.s_status ? <span className="badge bg-label-primary">• Live</span> : <span class="badge bg-label-dark">• Offline</span>}
               <h4 className="mb-2">Welcome to Cast My Vote! 👆</h4>
               <p className="mb-4">Please Register to get Started!</p>
               <p className="text-center" style={{ color: "red" }}>
@@ -150,6 +151,7 @@ export default function Register() {
                     <button
                       onClick={regStart}
                       className="btn btn-primary d-grid w-100"
+                      disabled={props.global.s_status ? false : true}
                     >
                       Continue
                     </button>

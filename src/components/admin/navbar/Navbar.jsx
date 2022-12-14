@@ -34,7 +34,7 @@ export default function Navbar(props) {
               onClick={() => setProfileOpen(!profileOpen)}
               href="javascript:void(0);"
             >
-              <div className="avatar avatar-online">
+              <div className={props.global.s_status ? "avatar avatar-online" : "avatar avatar-offline"}>
                 <img
                   src="https://www.shareicon.net/data/2016/05/24/770139_man_512x512.png"
                   alt=""
@@ -64,7 +64,7 @@ export default function Navbar(props) {
             <a className="dropdown-item" href="#">
               <div className="d-flex">
                 <div className="flex-shrink-0 me-3">
-                  <div className="avatar avatar-online">
+                  <div className={props.global.s_status ? "avatar avatar-online" : "avatar avatar-offline"}>
                     <img
                       src="https://www.shareicon.net/data/2016/05/24/770139_man_512x512.png"
                       alt=""

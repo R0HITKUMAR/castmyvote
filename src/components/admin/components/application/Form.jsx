@@ -187,11 +187,11 @@ export default function Form(props) {
           onClick={() => navigate("/")}
           className="btn btn-primary float-end"
         >
-          <i className="fa-solid fa-home" /> Home
-        </button>
+          <i className="fa-solid fa-home" />
+        </button><br />
       </h4>
       <div className="row">
-        <div className="col-md-12">
+        <div className="col-12">
           <div className="card mb-4">
             <h5 className="card-header">Register as 1st Time Voter</h5>
             <div className="card-body">
@@ -349,7 +349,7 @@ export default function Form(props) {
                       Supporting Document
                     </label>
                     {!data.proof && (
-                      <div className="col-6">
+                      <div className="col-md-6 col-12">
                         <div className="input-group">
                           <input
                             type="file"
@@ -369,7 +369,7 @@ export default function Form(props) {
                       </div>
                     )}
                     {!data.proof && (
-                      <div className="col-6">
+                      <div className="col-md-6 col-12">
                         {percF !== 0 && (
                           <div className="progress mt-2">
                             <div

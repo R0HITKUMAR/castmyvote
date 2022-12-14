@@ -85,6 +85,9 @@ export default function Login(props) {
                   height={"100px"}
                 />
               </div>
+              {props.global.s_status ? <span className="badge bg-label-primary">• Live</span> : <span class="badge bg-label-dark">• Offline</span>}
+
+
               <h4 className="mb-2">Welcome to Cast My Vote! 👆</h4>
               <p className="mb-4">Please Login to your account</p>
               <p className="text-center" style={{ color: "red" }}>
@@ -134,6 +137,7 @@ export default function Login(props) {
                       <button
                         onClick={sendOTP}
                         className="btn btn-primary d-grid w-100"
+                        disabled={props.global.s_status ? false : true}
                       >
                         Continue
                       </button>

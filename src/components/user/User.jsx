@@ -16,7 +16,7 @@ export default function User(props) {
   });
   return (
     <>
-      {global.doc && <Modal global={global} setGlobal={setGlobal} />}
+      {props.global.doc && <Modal global={props.global} setGlobal={props.setGlobal} />}
       <div className="layout-wrapper layout-content-navbar layout-without-menu">
         <div className="layout-container">
           <div className="layout-page">
@@ -29,7 +29,7 @@ export default function User(props) {
                       path="/*"
                       element={
                         <>
-                          <Home user={props.user} setGlobal={setGlobal} />
+                          <Home user={props.user} setGlobal={props.setGlobal} />
                         </>
                       }
                     />
@@ -43,7 +43,7 @@ export default function User(props) {
                             <Form
                               user={props.user}
                               global={global}
-                              setGlobal={setGlobal}
+                              setGlobal={props.setGlobal}
                             />
                           )}
                         </>
