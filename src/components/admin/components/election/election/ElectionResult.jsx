@@ -52,38 +52,35 @@ export default function ElectionResult() {
                                 <dt className="col-sm-3 text-truncate">Ends</dt>
                                 <dd className="col-sm-9">{data.end_date}</dd>
                             </dl>
-                            {winner && <> <span className="fw-semibold d-block mb-1 text-center text-bold">Winner</span>
-                                <div className="row">
-                                    <div className="col-3">
-                                        <img
-                                            src={winner[0].candidate_dp}
-                                            alt="Candidate"
-                                            className="d-block rounded"
-                                            width={100}
-                                            height={100}
-                                        />
-                                    </div>
-                                    <div className="col-5 my-2 text-center pl-2">
-                                        <span>{winner[0].candidate_id}</span>
-                                        <h5>
-                                            {winner[0].candidate_name}
-                                            <br />
-                                            <small>({winner[0].candidate_party})</small><br />
-                                            <small>Votes: {winner[0].candidate_votes}</small>
-                                        </h5>
-                                    </div>
-                                    <div className="col-3">
-                                        <img
-                                            src={winner[0].candidate_logo}
-                                            alt="Candidate"
-                                            className="d-block rounded"
-                                            width={100}
-                                            height={100}
-                                        />
-                                    </div>
-                                </div></>}
-                        </div>
 
+                        </div>
+                        {winner && <> <span className="fw-semibold d-block mb-1 text-center text-bold">Winner</span>
+                            <div className="winner-section p-1" >
+                                <img
+                                    src={winner[0].candidate_dp}
+                                    alt="Candidate"
+                                    className="d-block rounded"
+                                    width={100}
+                                    height={100}
+                                />
+                                <span className="text-center">
+                                    <span>{winner[0].candidate_id}</span>
+                                    <h5>
+                                        {winner[0].candidate_name}
+                                        <br />
+                                        <small>({winner[0].candidate_party})</small><br />
+                                        <small>Votes: {winner[0].candidate_votes}</small>
+                                    </h5>
+                                </span>
+                                <img
+                                    src={winner[0].candidate_logo}
+                                    alt="Candidate"
+                                    className="d-block rounded"
+                                    width={100}
+                                    height={100}
+                                />
+                            </div>
+                        </>}
                     </div>
                 </div>
                 <div className="col-md-6 col-12">
@@ -92,37 +89,30 @@ export default function ElectionResult() {
                             return (
                                 <div className="col-12 p-1" >
                                     <div className="card">
-                                        <div className="row">
-                                            <div className="col-3">
-                                                <img
-                                                    src={winner.candidate_dp}
-                                                    alt="Candidate"
-                                                    className="d-block rounded"
-                                                    width={100}
-                                                    height={100}
-                                                />
-                                            </div>
-                                            <div className="col-1 align-self-center">
+                                        <div className="winner-section" >
+                                            <img
+                                                src={winner.candidate_dp}
+                                                alt="Candidate"
+                                                className="d-block rounded"
+                                                width={100}
+                                                height={100}
+                                            />
+                                            <span className='text-center p-1'>
                                                 <h1>{index + 1}</h1>
-                                            </div>
-                                            <div className="col-5 align-self-center">
-                                                <span>{winner.candidate_id}</span>
                                                 <h5>
+                                                    <small>{winner.candidate_id}</small><br />
                                                     {winner.candidate_name}
                                                     <br />
                                                     <small>({winner.candidate_party})</small><br />
                                                     <small>Total Votes: {winner.candidate_votes}</small>
-                                                </h5>
-                                            </div>
-                                            <div className="col-3">
-                                                <img
-                                                    src={winner.candidate_logo}
-                                                    alt="Candidate"
-                                                    className="d-block rounded"
-                                                    width={100}
-                                                    height={100}
-                                                />
-                                            </div>
+                                                </h5></span>
+                                            <img
+                                                src={winner.candidate_logo}
+                                                alt="Candidate"
+                                                className="d-block rounded"
+                                                width={100}
+                                                height={100}
+                                            />
                                         </div>
                                     </div>
                                 </div>)

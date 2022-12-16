@@ -41,7 +41,7 @@ function App() {
       if (res.data.live === true) {
         setGlobal({ ...global, s_status: true });
       } else {
-        // navigate("/");
+        navigate("/");
       }
     });
     if (token) {

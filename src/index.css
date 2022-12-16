@@ -16,3 +16,9 @@ button {
   background: none;
   cursor: pointer !important;
 }
+
+.winner-section{
+  display: flex;
+  justify-content: space-between;
+
+}
