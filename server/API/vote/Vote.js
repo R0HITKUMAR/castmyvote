@@ -1,8 +1,11 @@
 import Card from "../../models/CMV_ID.js";
 import Election from "../../models/Elections.js";
 import Vote from "../../models/Votes.js";
+import { contractABI, contractAddress } from "./Contract.js";
+import Web3 from "web3";
 
-function castVote(req, res) {
+async function castVote(req, res) {
+  console.log(req.body);
   const { election_id, election_name, candidate_id, voter_id } = req.body;
   const timestamp = new Date().toLocaleString();
   const vote = new Vote({
@@ -53,7 +56,10 @@ function castVote(req, res) {
         name: election_name,
         timestamp: timestamp,
       };
+
+      // Add data to card.elctions
       card.elections.push(election);
+
       // Save the card
       card.save((err) => {
         if (err) {
@@ -65,11 +71,34 @@ function castVote(req, res) {
     }
   });
 
-  res.send({
-    message:
-      "Thanks for Partcipating in Election!. Results will available once ELection Ends.",
-    type: "success",
-  });
+  try {
+    let web3 = new Web3(
+      new Web3.providers.HttpProvider("http://127.0.0.1:7545")
+    );
+
+    // Get the contract instance
+    let contract = new web3.eth.Contract(contractABI, contractAddress);
+
+    // Get the accounts
+    let accounts = await web3.eth.getAccounts();
+    web3.eth.defaultAccount = accounts[0];
+    const receipt = await contract.methods
+      .addVote(election_id, election_name, candidate_id, timestamp)
+      .send({ from: web3.eth.defaultAccount, gas: 3000000 });
+    res.send({
+      message:
+        "Thanks for Partcipating in Election!. Results will available once Election Ends",
+      type: "success",
+      txn: receipt.transactionHash,
+    });
+  } catch (err) {
+    res.send({
+      message:
+        "Thanks for Partcipating in Election!. Results will available once Election Ends",
+      type: "success",
+      txn: "0x0000000",
+    });
+  }
 }
 
 export default castVote;

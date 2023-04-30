@@ -29,9 +29,8 @@ function register(req, res) {
     .save()
     .then((card) => {
       sendApplication(card);
-      const msg = `\nGreetings from CMV!\n\n Your Application for new Voter ID has been submitted Successfully with Application No. ${
-        card.application_no
-      } at ${new Date().toLocaleString()}\n\nYou will receive your Voter ID through mail once your application is approved. or You can track status by User Login.\n\nThank You\nTeam CastMyVote!`;
+      const msg = `\nGreetings from CMV!\n\n Your Application for new Voter ID has been submitted Successfully with Application No. ${card.application_no
+        } at ${new Date().toLocaleString()}\n\nYou will receive your Voter ID through mail once your application is approved. or You can track status by User Login.\n\nThank You\nTeam CastMyVote!`;
       sendSMS(`+91${card.phone}`, msg);
       User.findOne({ email: card.email }).then((user) => {
         if (user) {
@@ -120,9 +119,10 @@ function retrieveOneApplication(req, res) {
     });
 }
 
+
 function approve(req, res) {
   const id = req.body.id;
-  if(req.body.role === "admin") {
+  console.log(req.body.id);
   const generator = new Generator();
   const pattern = "/CMV/CVCVCV//000";
   const cmv_id = generator.pattern(pattern);
@@ -156,7 +156,7 @@ function approve(req, res) {
         error: err,
         status: 2,
       });
-    });}
+    });
 }
 
 export {

@@ -43,7 +43,7 @@ export default function EVote(props) {
           if (res.data.type === "success") {
             Swal.fire({
               title: "Success!",
-              text: res.data.message,
+              text: res.data.message + " with ID: " + res.data.txn,
               icon: "success",
             })
             navigate("/");

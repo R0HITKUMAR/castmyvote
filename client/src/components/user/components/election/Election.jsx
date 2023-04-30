@@ -92,7 +92,7 @@ export default function Election() {
           </ul>
           <div
             className="tab-content"
-            style={{ height: "315px", overflow: "scroll" }}
+            style={{ height: "315px", overflowY: "scroll", overflowX: "hidden" }}
           >
             <div
               className="tab-pane fade show active"

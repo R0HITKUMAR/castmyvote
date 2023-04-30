@@ -1,7 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
-import dotenv from "dotenv";
 import ConnectDB from "./database.js";
 import Auth from "./routes/Auth.js";
 import OTP from "./routes/OTP.js";
@@ -12,7 +11,6 @@ import Vote from "./routes/Vote.js";
 import config from "./config.js";
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 const PORT = config.PORT;
-dotenv.config();
 
 const app = express();
 app.use(express.json());

@@ -24,7 +24,8 @@
     "sort-json-array": "^0.1.7",
     "source-map-loader": "^4.0.0",
     "sweetalert2": "^11.4.34",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "web3": "^1.9.0"
   },
   "scripts": {
     "start": "react-scripts start",

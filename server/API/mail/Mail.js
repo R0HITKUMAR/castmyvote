@@ -25,7 +25,7 @@ transporter.use("compile", hbs(handlebarOptions));
 
 function registerOTP(user, OTP) {
   var mailOptions = {
-    from: "CastMyVote <no-reply@aboutrohit.in>",
+    from: "CastMyVote <r.k2962002@gmail.com>",
     to: user.email,
     subject: "OTP to verify your Account on CastMyVote",
     template: "registerOTP",
@@ -47,7 +47,7 @@ function registerOTP(user, OTP) {
 
 function welcomeMail(name, email) {
   var mailOptions = {
-    from: "CastMyVote <no-reply@aboutrohit.in>",
+    from: "CastMyVote <r.k2962002@gmail.com>",
     to: email,
     subject: "Welcome to CastMyVote",
     template: "welcome",
@@ -68,7 +68,7 @@ function welcomeMail(name, email) {
 
 function loginOTP(user, OTP) {
   var mailOptions = {
-    from: "CastMyVote <no-reply@aboutrohit.in>",
+    from: "CastMyVote <r.k2962002@gmail.com>",
     to: user.email,
     subject: "OTP to Login into your Account on CastMyVote",
     template: "loginOTP",
@@ -89,7 +89,7 @@ function loginOTP(user, OTP) {
 
 function resetOTP(user, OTP) {
   var mailOptions = {
-    from: "CastMyVote <no-reply@aboutrohit.in>",
+    from: "CastMyVote <r.k2962002@gmail.com>",
     to: user.email,
     subject: "OTP to Reset Password on CastMyVote",
     template: "resetOTP",
@@ -110,7 +110,7 @@ function resetOTP(user, OTP) {
 
 function sendApplication(data) {
   var mailOptions = {
-    from: "CastMyVote <no-reply@aboutrohit.in>",
+    from: "CastMyVote <r.k2962002@gmail.com>",
     to: data.email,
     subject: `Application No. ${data.application_no} has been submitted Successfully | CastMyVote`,
     template: "application",
@@ -133,7 +133,7 @@ function sendApplication(data) {
 
 function sendVoterID(data) {
   var mailOptions = {
-    from: "CastMyVote <no-reply@aboutrohit.in>",
+    from: "CastMyVote <r.k2962002@gmail.com>",
     to: data.email,
     subject:
       "Application No." +
@@ -166,7 +166,7 @@ function sendVoterID(data) {
 
 function sendCandidateMail(election, candidate) {
   var mailOptions = {
-    from: "CastMyVote <no-reply@aboutrohit.in>",
+    from: "CastMyVote <r.k2962002@gmail.com>",
     to: candidate.candidate_email,
     subject: `Regarding Appointment of Contestant for ${election.name}  | CastMyVote`,
     template: "candidate",
