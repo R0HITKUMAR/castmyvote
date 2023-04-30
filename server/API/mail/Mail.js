@@ -108,6 +108,28 @@ function resetOTP(user, OTP) {
   });
 }
 
+function thanksmail(user, OTP) {
+  var mailOptions = {
+    from: "CastMyVote <r.k2962002@gmail.com>",
+    to: user.email,
+    subject: "Thanks for your Vote on CastMyVote",
+    template: "thanks",
+    context: {
+      name: user.name,
+      election: user.election,
+      email: user.email,
+    },
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
+}
+
 function sendApplication(data) {
   var mailOptions = {
     from: "CastMyVote <r.k2962002@gmail.com>",
@@ -199,4 +221,5 @@ export {
   sendVoterID,
   sendApplication,
   sendCandidateMail,
+  thanksmail
 };

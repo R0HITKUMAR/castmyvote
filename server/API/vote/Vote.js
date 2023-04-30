@@ -3,6 +3,8 @@ import Election from "../../models/Elections.js";
 import Vote from "../../models/Votes.js";
 import { contractABI, contractAddress } from "./Contract.js";
 import Web3 from "web3";
+import sendSMS from "../sms/SMS.js";
+import { thanksmail } from "../mail/Mail.js";
 
 async function castVote(req, res) {
   console.log(req.body);
@@ -65,6 +67,15 @@ async function castVote(req, res) {
         if (err) {
           console.log(err);
         } else {
+          // Send SMS
+          const msg = `\nGreetings from CastMyVote\n\nYou have Successfully Voted in ${election_name} Election at ${timestamp}\n\nThank You\nTeam CastMyVote!`;
+          sendSMS(`+91${card.phone}`, msg);
+          const user = {
+            name: card.name,
+            email: card.email,
+            election: `${election_name} [${election_id}]`,
+          };
+          thanksmail(user);
           console.log("Card Updated with ID: " + card._id);
         }
       });
