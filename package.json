@@ -5,9 +5,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "www": "npm run dev --prefix www",
-    "admin": "npm run dev --prefix admin",
+    "app": "npm run dev --prefix app",
     "server": "npm start --prefix server",
-    "start": "concurrently \"npm run server\" \"npm run www\" \"npm run admin\""
+    "start": "concurrently \"npm run server\" \"npm run www\" \"npm run app\""
   },
   "author": "",
   "license": "ISC",
