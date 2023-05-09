@@ -4,9 +4,10 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "client": "npm start --prefix client",
+    "www": "npm run dev --prefix www",
+    "admin": "npm run dev --prefix admin",
     "server": "npm start --prefix server",
-    "start": "concurrently \"npm run server\" \"npm run client\""
+    "start": "concurrently \"npm run server\" \"npm run www\" \"npm run admin\""
   },
   "author": "",
   "license": "ISC",

@@ -1,0 +1,9 @@
+.footer-style-nine li a,
+.footer-style-nine li a:hover,
+.footer-style-nine li a:focus {
+    color: white !important;
+}
+
+.footer-style-nine li a:hover{
+    text-decoration: underline;
+}
