@@ -8,6 +8,8 @@ import Card from "./routes/Card.js";
 import File from "./routes/FileUpload.js";
 import Election from "./routes/Election.js";
 import Vote from "./routes/Vote.js";
+import Newsletter from "./routes/Newsletter.js";
+import Query from "./routes/Query.js";
 import config from "./config.js";
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 const PORT = config.PORT;
@@ -25,6 +27,8 @@ app.use("/cmv", Card);
 app.use("/file", File);
 app.use("/election", Election);
 app.use("/vote", Vote);
+app.use("/newsletter", Newsletter);
+app.use("/query", Query);
 
 app.get("/", (req, res) => {
   res.send({

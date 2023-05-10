@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../assets/images/logo.svg";
+import Logo from "../assets/images/logo/logo.svg";
 import { useNavigate } from "react-router-dom";
 import PPT from "../assets/docs/ppt.pdf";
 import Report from "../assets/docs/report.pdf";

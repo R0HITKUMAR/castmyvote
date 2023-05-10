@@ -108,6 +108,23 @@ function resetOTP(user, OTP) {
   });
 }
 
+function sendSubscriptionMail(mail) {
+  var mailOptions = {
+    from: "CastMyVote <r.k2962002@gmail.com>",
+    to: mail,
+    subject: "Thanks for Subscribing Us | CastMyVote",
+    template: "subscribe",
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
+}
+
 function thanksmail(user, OTP) {
   var mailOptions = {
     from: "CastMyVote <r.k2962002@gmail.com>",
@@ -118,6 +135,29 @@ function thanksmail(user, OTP) {
       name: user.name,
       election: user.election,
       email: user.email,
+    },
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
+}
+
+function sendQueryMail(user) {
+  var mailOptions = {
+    from: "CastMyVote <r.k2962002@gmail.com>",
+    to: user.email,
+    subject: "Thanks for Contacting Us | CastMyVote",
+    template: "query",
+    context: {
+      name: user.name,
+      email: user.email,
+      timestamp: user.timestamp,
+      id: user.id,
     },
   };
 
@@ -220,6 +260,8 @@ export {
   resetOTP,
   sendVoterID,
   sendApplication,
+  sendQueryMail,
   sendCandidateMail,
-  thanksmail
+  sendSubscriptionMail,
+  thanksmail,
 };

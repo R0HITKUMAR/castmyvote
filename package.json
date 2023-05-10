@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "www": "npm run dev --prefix www",
-    "app": "npm run dev --prefix app",
+    "app": "npm run start --prefix app",
     "server": "npm start --prefix server",
     "start": "concurrently \"npm run server\" \"npm run www\" \"npm run app\""
   },

@@ -1,21 +1,62 @@
 import React from "react";
+import axios from "../Axios";
 
 export default function Contact() {
+  const [alert, setAlert] = React.useState("");
+  const [data, setData] = React.useState({
+    name: "",
+    email: "",
+    message: "",
+    phone: "",
+  });
+
+  const handleChange = (e) => {
+    setAlert("");
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (
+      data.email !== "" &&
+      data.email.match(
+        /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,})$/
+      ) &&
+      data.name !== "" &&
+      data.phone !== "" &&
+      data.message !== "" &&
+      data.phone.match(/^[0-9]{10}$/)
+    ) {
+      axios
+        .post("/query/add", data)
+        .then((res) => {
+          setAlert(res.data.message);
+          setData({
+            name: "",
+            email: "",
+            message: "",
+            phone: "",
+          });
+        })
+        .catch((err) => {
+          setAlert(err.response.data.message);
+        });
+    } else {
+      {
+        setAlert("Please fill all the fields correctly");
+      }
+    }
+  };
+
   return (
     <div className="fancy-feature-twentyTwo position-relative pt-100 mt-100">
       <div className="fancy-short-banner-eight">
         <div className="container">
           <div className="row align-items-center">
             <div
-              className="col-lg-5 wow fadeInLeft"
+              className="col-md-6 col-12 wow fadeInLeft"
               style={{ visibility: "visible", animationName: "fadeInLeft" }}
             >
-              <img
-                src="images/icon/icon_60.svg"
-                alt=""
-                className="lazy-img"
-                style={{}}
-              />
               <div className="title-style-one mt-35 mb-30">
                 <h2 className="main-title fw-normal tx-dark m0">
                   Let’s talk <br /> with <span>Us</span>.
@@ -28,27 +69,33 @@ export default function Contact() {
               </p>
             </div>
             <div
-              className="col-xl-5 col-lg-6 ms-auto wow fadeInRight"
+              className="col-md-6 col-12 ms-auto wow fadeInRight"
               style={{ visibility: "visible", animationName: "fadeInRight" }}
             >
               <div className="form-bg-wrapper position-relative rounded bg-white pe-4 ps-4 pe-lg-5 ps-lg-5 pt-60 pb-50 md-mt-60">
                 <div className="form-style-two">
-                  <form
-                    action="inc/contact.php"
-                    id="contact-form"
-                    data-toggle="validator"
-                    noValidate="true"
-                  >
-                    <div className="messages" />
+                  <form id="contact-form">
                     <div className="row controls">
-                      <div className="col-12">
+                      <div className="col-6">
                         <div className="input-group-meta form-group mb-20">
                           <input
                             type="text"
-                            placeholder="Your name*"
                             name="name"
-                            required="required"
-                            data-error="Name is required."
+                            onChange={handleChange}
+                            value={data.name}
+                            placeholder="Your Name*"
+                          />
+                          <div className="help-block with-errors" />
+                        </div>
+                      </div>
+                      <div className="col-6">
+                        <div className="input-group-meta form-group mb-20">
+                          <input
+                            type="number"
+                            name="phone"
+                            onChange={handleChange}
+                            value={data.phone}
+                            placeholder="Your Phone*"
                           />
                           <div className="help-block with-errors" />
                         </div>
@@ -59,8 +106,8 @@ export default function Contact() {
                             type="email"
                             placeholder="Email*"
                             name="email"
-                            required="required"
-                            data-error="Valid email is required."
+                            onChange={handleChange}
+                            value={data.email}
                           />
                           <div className="help-block with-errors" />
                         </div>
@@ -71,14 +118,24 @@ export default function Contact() {
                             placeholder="Your message*"
                             name="message"
                             required="required"
-                            data-error="Please,leave us a message."
-                            defaultValue={""}
+                            onChange={handleChange}
+                            value={data.message}
                           />
                           <div className="help-block with-errors" />
                         </div>
                       </div>
                       <div className="col-12">
-                        <button className="btn-thirteen w-100 fw-500 tran3s text-uppercase">
+                        {alert && (
+                          <div className="alert alert-warning text-center">
+                            {alert}
+                          </div>
+                        )}
+                      </div>
+                      <div className="col-12">
+                        <button
+                          className="btn-thirteen w-100 fw-500 tran3s text-uppercase"
+                          onClick={handleSubmit}
+                        >
                           SEND MESSAGE
                         </button>
                       </div>

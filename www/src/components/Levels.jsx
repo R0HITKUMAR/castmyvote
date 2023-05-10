@@ -1,7 +1,6 @@
 import React from "react";
 import Admin from "../assets/images/election/admin.png";
 import Voter from "../assets/images/election/voter.png";
-import Icon from "../assets/images/icon/icon_18.svg";
 
 export default function Levels() {
   return (
@@ -61,12 +60,7 @@ export default function Levels() {
                 </ul>
               </p>
               <a href="https://app.castmyvote.ml" target="_blank" rel="noreffer" >
-                <img
-                  src={Icon}
-                  alt=""
-                  className="lazy-img"
-                  style={{}}
-                />
+                <i className="fa-solid fa-arrow-right" />
               </a>
             </div>
           </div>
@@ -100,12 +94,7 @@ export default function Levels() {
                 </ul>
               </p>
               <a href="https://app.castmyvote.ml" target="_blank" rel="noreffer" >
-                <img
-                  src={Icon}
-                  alt=""
-                  className="lazy-img"
-                  style={{}}
-                />
+              <i className="fa-solid fa-arrow-right" />
               </a>
             </div>
           </div>

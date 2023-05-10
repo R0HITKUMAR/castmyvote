@@ -29,6 +29,8 @@ export default function Sidebar(props) {
     { name: "Voters", icon: "bx-user", link: "/voters" },
     { name: "Applications", icon: "bx-user", link: "/applications" },
     { name: "Elections", icon: "bxs-hand-up", link: "/elections" },
+    { name: "Query", icon: "bx-question-mark", link: "/query" },
+    { name: "Newsletter", icon: "bx-envelope", link: "/newsletter" },
     {
       name: "Actions",
       icon: "bx-cog",

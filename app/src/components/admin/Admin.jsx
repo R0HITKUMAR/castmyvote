@@ -10,6 +10,8 @@ import Elections from "./components/election/Elections";
 import Form from "./components/application/Form";
 import Modal from "../common/Modal";
 import Stats from "./components/stats/Stats";
+import Newsletter from "./components/forms/Newsletter";
+import Query from "./components/forms/Query";
 
 export default function Admin(props) {
   const [count, setCount] = React.useState({
@@ -21,14 +23,15 @@ export default function Admin(props) {
     completed_elections: 0,
   });
 
-
   const hideSidebar = () => {
     document.querySelector("html").classList.remove("layout-menu-expanded");
   };
 
   return (
     <>
-      {props.global.doc && <Modal global={props.global} setGlobal={props.setGlobal} />}
+      {props.global.doc && (
+        <Modal global={props.global} setGlobal={props.setGlobal} />
+      )}
       <Stats count={count} setCount={setCount} />
       <div className="layout-wrapper layout-content-navbar">
         <div className="layout-container">
@@ -42,23 +45,38 @@ export default function Admin(props) {
                   <Route
                     path="/applications/*"
                     element={
-                      <Applications global={props.global} setGlobal={props.setGlobal} />
+                      <Applications
+                        global={props.global}
+                        setGlobal={props.setGlobal}
+                      />
                     }
                   />
                   <Route
                     path="/voters/*"
-                    element={<Voters global={props.global} setGlobal={props.setGlobal} />}
+                    element={
+                      <Voters
+                        global={props.global}
+                        setGlobal={props.setGlobal}
+                      />
+                    }
                   />
                   <Route
                     path="/voters/newVoter"
-                    element={<Form global={props.global} setGlobal={props.setGlobal} />}
+                    element={
+                      <Form global={props.global} setGlobal={props.setGlobal} />
+                    }
                   />
                   <Route
                     path="/elections/*"
                     element={
-                      <Elections global={props.global} setGlobal={props.setGlobal} />
+                      <Elections
+                        global={props.global}
+                        setGlobal={props.setGlobal}
+                      />
                     }
                   />
+                  <Route path="/newsletter/*" element={<Newsletter />} />
+                  <Route path="/query/*" element={<Query />} />
                 </Routes>
               </div>
             </div>
