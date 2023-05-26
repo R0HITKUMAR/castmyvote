@@ -139,7 +139,7 @@ function getResults(req, res) {
         });
       } else {
         const candidates = election.candidates;
-        const winner = sortJsonArray(candidates, "votes", "des");
+        const winner = sortJsonArray(candidates, "candidate_votes", "asc");
         return res.send({
           winner: winner,
           election: election,

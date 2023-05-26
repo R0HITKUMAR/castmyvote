@@ -6,6 +6,7 @@ const client = twilio(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN)
 function sendSMS(to, body) {
   // console.log("Sending SMS to " + to);
   const from = config.SMS_FROM
+  // console.log(`Sending SMS from ${from} to ${to}. Message: ${body}`)
   client.messages
     .create({ from, to, body })
     .then((message) => {
