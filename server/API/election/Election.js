@@ -41,9 +41,7 @@ function retrieveAllElections(req, res) {
         const s = new Date(elections[i].s_date);
         const e = new Date(elections[i].e_date);
         // Get new date() in asia/kolkata
-        const now = new Date(
-          new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
-        );
+        const now = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
         if (now >= s && now <= e) {
           elections[i].status = "Live";
         } else if (now < s) {
@@ -72,7 +70,7 @@ function retrieveOneElection(req, res) {
     .then((election) => {
       const s = new Date(election.s_date);
       const e = new Date(election.e_date);
-      const now = new Date();
+      const now = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
       if (now >= s && now <= e) {
         election.status = "Live";
       } else if (now < s) {
