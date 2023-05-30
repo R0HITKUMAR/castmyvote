@@ -17,7 +17,7 @@ function register(req, res) {
     address: card.address,
     dob: card.dob,
     photo: card.photo,
-    application_no: "CMV" + Date.now(),
+    application_no: "CMV" + Date.now("en-US", { timeZone: "Asia/Kolkata" }),
     timestamp: new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
     status: "Submitted",
     proof: card.proof,

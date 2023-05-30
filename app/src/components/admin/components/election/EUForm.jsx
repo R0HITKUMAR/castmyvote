@@ -37,10 +37,10 @@ export default function EForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (data.s_date) {
-      data.start_date = new Date(data.s_date).toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
+      data.start_date = new Date(data.s_date).toLocaleString();
     }
     if (data.e_date) {
-      data.end_date = new Date(data.e_date).toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
+      data.end_date = new Date(data.e_date).toLocaleString();
     }
     if (
       data.code &&

@@ -34,8 +34,8 @@ export default function EForm() {
       data.e_date !== ""
     ) {
       if (data.s_date < data.e_date) {
-        data.start_date = new Date(data.s_date).toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
-        data.end_date = new Date(data.e_date).toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
+        data.start_date = new Date(data.s_date).toLocaleString();
+        data.end_date = new Date(data.e_date).toLocaleString();
         axios
           .post("/election/add", data)
           .then((res) => {
