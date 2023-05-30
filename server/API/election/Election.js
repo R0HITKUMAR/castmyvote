@@ -2,11 +2,9 @@ import Election from "../../models/Elections.js";
 import sortJsonArray from "sort-json-array";
 import Generator from "pattern-string-generator";
 import jwt from "jsonwebtoken";
-import sendSMS from "../sms/SMS.js";
 
 function createElection(req, res) {
   const body = req.body;
-  const token = body.token;
   const generator = new Generator();
   const pattern = "/CMVEL/CV//0000";
   const id = generator.pattern(pattern);
@@ -22,7 +20,7 @@ function createElection(req, res) {
       return res.send({
         election: election,
         message: "Election Created Successfully",
-        id: id,
+        id: election.election_id,
         status: 0,
       });
     })
@@ -42,7 +40,10 @@ function retrieveAllElections(req, res) {
         const s = new Date(elections[i].s_date);
         const e = new Date(elections[i].e_date);
         // Get new date() in asia/kolkata
-        const now = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+        const date = new Date().toLocaleString("en-US", {
+          timeZone: "Asia/Kolkata",
+        });
+        const now = new Date(date);
         if (now >= s && now <= e) {
           elections[i].status = "Live";
         } else if (now < s) {
@@ -71,7 +72,10 @@ function retrieveOneElection(req, res) {
     .then((election) => {
       const s = new Date(election.s_date);
       const e = new Date(election.e_date);
-      const now = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+      const date = new Date().toLocaleString("en-US", {
+        timeZone: "Asia/Kolkata",
+      });
+      const now = new Date(date);
       if (now >= s && now <= e) {
         election.status = "Live";
       } else if (now < s) {
@@ -133,7 +137,10 @@ function getResults(req, res) {
   Election.findOne({ election_id: id })
     .then((election) => {
       const e = new Date(election.e_date);
-      const now = new Date();
+      const date = new Date().toLocaleString("en-US", {
+        timeZone: "Asia/Kolkata",
+      });
+      const now = new Date(date);
       if (now < e) {
         return res.send({
           message: "Election Not Completed",
