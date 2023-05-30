@@ -2,6 +2,7 @@ import Election from "../../models/Elections.js";
 import sortJsonArray from "sort-json-array";
 import Generator from "pattern-string-generator";
 import jwt from "jsonwebtoken";
+import sendSMS from "../sms/SMS.js";
 
 function createElection(req, res) {
   const body = req.body;
