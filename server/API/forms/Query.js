@@ -4,7 +4,7 @@ import { sendQueryMail } from "../mail/Mail.js";
 function addQuery(req, res) {
   const id = "CMV" + Date.now();
   req.body.id = id;
-  req.body.timestamp = new Date().toLocaleString();
+  req.body.timestamp = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
   const query = new Query(req.body);
   // Generate ID
   sendQueryMail(query);

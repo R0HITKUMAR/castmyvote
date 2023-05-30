@@ -32,7 +32,7 @@ function Login(req, res) {
             { expiresIn: tokentime },
             (err, token) => {
               if (err) return res.data({ message: err });
-              const msg = `\nGreetings from CastMyVote\n\nLogin in attempted Successfully at ${new Date().toLocaleString()}\n\nIf not kindly Reset your Password\nhttps://castmyvote.ml/reset.\n\nThank You\nTeam CastMyVote!`;
+              const msg = `\nGreetings from CastMyVote\n\nLogin in attempted Successfully at ${new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })}\n\nIf not kindly Reset your Password\nhttps://castmyvote.ml/reset.\n\nThank You\nTeam CastMyVote!`;
               sendSMS(`+91${dbUser.phone}`, msg);
               return res.send({
                 message: "Logged In Successfully",

@@ -18,7 +18,7 @@ function register(req, res) {
     dob: card.dob,
     photo: card.photo,
     application_no: "CMV" + Date.now(),
-    timestamp: new Date().toLocaleString(),
+    timestamp: new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
     status: "Submitted",
     proof: card.proof,
     id_no: card.id_no,
@@ -30,7 +30,7 @@ function register(req, res) {
     .then((card) => {
       sendApplication(card);
       const msg = `\nGreetings from CMV!\n\n Your Application for new Voter ID has been submitted Successfully with Application No. ${card.application_no
-        } at ${new Date().toLocaleString()}\n\nYou will receive your Voter ID through mail once your application is approved. or You can track status by User Login.\n\nThank You\nTeam CastMyVote!`;
+        } at ${new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })}\n\nYou will receive your Voter ID through mail once your application is approved. or You can track status by User Login.\n\nThank You\nTeam CastMyVote!`;
       sendSMS(`+91${card.phone}`, msg);
       User.findOne({ email: card.email }).then((user) => {
         if (user) {
@@ -131,7 +131,7 @@ function approve(req, res) {
     .then((card) => {
       card.status = "Approved";
       card.id_no = cmv_id;
-      card.id_date = new Date().toLocaleString();
+      card.id_date = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
       card.id_doc = "";
       card.save();
 

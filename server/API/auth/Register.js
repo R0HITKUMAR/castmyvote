@@ -9,7 +9,7 @@ import sendSMS from "../sms/SMS.js";
 app.post("/register", async (req, res) => {
   const user = req.body;
   const takenEmail = await User.findOne({ email: user.email });
-  const registeredOn = new Date().toLocaleString();
+  const registeredOn = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
 
   if (takenEmail) {
     return res.send({

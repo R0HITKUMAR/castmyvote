@@ -9,7 +9,7 @@ import { thanksmail } from "../mail/Mail.js";
 async function castVote(req, res) {
   console.log(req.body);
   const { election_id, election_name, candidate_id, voter_id } = req.body;
-  const timestamp = new Date().toLocaleString();
+  const timestamp = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
   const vote = new Vote({
     election_id,
     election_name,

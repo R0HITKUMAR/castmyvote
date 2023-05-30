@@ -37,7 +37,7 @@ export default function Stats({ count, setCount }) {
         upcoming_elections: upcoming.length,
         ongoing_elections: live.length,
         completed_elections: past.length,
-        now: new Date().toLocaleString(),
+        now: new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),
       });
     });
   }, []);
