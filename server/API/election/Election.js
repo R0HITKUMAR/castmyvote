@@ -40,7 +40,10 @@ function retrieveAllElections(req, res) {
       for (let i = 0; i < elections.length; i++) {
         const s = new Date(elections[i].s_date);
         const e = new Date(elections[i].e_date);
-        const now = new Date();
+        // Get new date() in asia/kolkata
+        const now = new Date(
+          new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+        );
         if (now >= s && now <= e) {
           elections[i].status = "Live";
         } else if (now < s) {
