@@ -43,7 +43,7 @@ export default function EForm() {
             Swal.fire({
               title: "Success!",
               text:
-                "Election added successfully with Election ID: " + res.data.id,
+                "Election added successfully with Election ID: " + res.data,
               icon: "success",
             });
             navigate("/elections");

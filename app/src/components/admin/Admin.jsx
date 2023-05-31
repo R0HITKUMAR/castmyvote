@@ -37,7 +37,7 @@ export default function Admin(props) {
         <div className="layout-container">
           <Sidebar hideSidebar={hideSidebar} logout={props.logout} />
           <div className="layout-page">
-            <Navbar logout={props.logout} global={props.global} />
+            <Navbar logout={props.logout} global={props.global} user={props.user} />
             <div className="content-wrapper">
               <div className="container-xxl flex-grow-1 container-p-y">
                 <Routes>

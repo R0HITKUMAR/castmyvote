@@ -149,7 +149,7 @@ export default function Election() {
             </div>
           </div>
         </div>
-        <div className="col-md-6 col-12" style={{ height: "350px", overflow: "scroll" }}>
+        <div className="col-md-6 col-12" id="candidates" style={{ height: "350px", overflowY: "scroll", overflowX: "hidden" }}>
           <Routes>
             <Route
               path="/*"

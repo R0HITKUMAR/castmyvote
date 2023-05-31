@@ -50,7 +50,7 @@ export default function Navbar(props) {
               href="javascript:void(0);"
             >
               <span className="fw-semibold d-block m-1">
-                Rohit Kumar
+                {props.user.name} (Admin)
               </span>
             </a>
           </li>
@@ -73,7 +73,7 @@ export default function Navbar(props) {
                   </div>
                 </div>
                 <div className="flex-grow-1">
-                  <span className="fw-semibold d-block">Rohit Kumar</span>
+                  <span className="fw-semibold d-block"> {props.user.name}</span>
                   <small className="text-muted">Admin</small>
                 </div>
               </div>

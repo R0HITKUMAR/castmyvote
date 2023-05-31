@@ -3,6 +3,7 @@ import Logo from "../assets/images/logo/logo-white.svg";
 import PPT from "../assets/docs/ppt.pdf";
 import Report from "../assets/docs/report.pdf";
 import Paper from "../assets/docs/paper.pdf";
+import Paper2 from "../assets/docs/paper2.pdf";
 import axios from "../Axios";
 
 export default function Footer(props) {
@@ -103,7 +104,15 @@ export default function Footer(props) {
                     href="javascript:void(0)"
                     onClick={() => props.setDoc(Paper)}
                   >
-                    Research Paper
+                    Research Paper - 1
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="javascript:void(0)"
+                    onClick={() => props.setDoc(Paper2)}
+                  >
+                    Research Paper - 2
                   </a>
                 </li>
               </ul>

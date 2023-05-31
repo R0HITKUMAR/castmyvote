@@ -84,7 +84,7 @@ export default function ElectionResult() {
                     </div>
                 </div>
                 <div className="col-md-6 col-12">
-                    <div className="row justify-content-center">
+                    <div className="row justify-content-center" style={{ height: "390px", overflowY: "scroll", overflowX: "hidden" }}>
                         {winner && winner.map((winner, index) => {
                             return (
                                 <div className="col-12 p-1" >

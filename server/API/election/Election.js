@@ -20,7 +20,6 @@ function createElection(req, res) {
       return res.send({
         election: election,
         message: "Election Created Successfully",
-        id: election.election_id,
         status: 0,
       });
     })
@@ -148,7 +147,7 @@ function getResults(req, res) {
         });
       } else {
         const candidates = election.candidates;
-        const winner = sortJsonArray(candidates, "candidate_votes", "asc");
+        const winner = sortJsonArray(candidates, "candidate_votes", "des");
         return res.send({
           winner: winner,
           election: election,

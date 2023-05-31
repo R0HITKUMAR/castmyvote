@@ -2,7 +2,7 @@ import Query from "../../models/Query.js";
 import { sendQueryMail } from "../mail/Mail.js";
 
 function addQuery(req, res) {
-  const id = "CMV" + Date.now();
+  const id = "CMV" + Date.now("en-US", { timeZone: "Asia/Kolkata" });
   req.body.id = id;
   req.body.timestamp = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
   const query = new Query(req.body);

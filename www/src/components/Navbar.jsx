@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import PPT from "../assets/docs/ppt.pdf";
 import Report from "../assets/docs/report.pdf";
 import Paper from "../assets/docs/paper.pdf";
+import Paper2 from "../assets/docs/paper2.pdf";
 
 export default function Navbar(props) {
   const navigate = useNavigate();
@@ -103,7 +104,7 @@ export default function Navbar(props) {
                         className="dropdown-item"
                         onClick={() => props.setDoc(PPT)}
                       >
-                        <span>Project Report</span>
+                        <span>Project PPT</span>
                       </a>
                     </li>
                     <li>
@@ -112,7 +113,16 @@ export default function Navbar(props) {
                         className="dropdown-item"
                         onClick={() => props.setDoc(Paper)}
                       >
-                        <span>Research Paper</span>
+                        <span>Research Paper - 1</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="javascript:void(0)"
+                        className="dropdown-item"
+                        onClick={() => props.setDoc(Paper2)}
+                      >
+                        <span>Research Paper - 2</span>
                       </a>
                     </li>
                   </ul>
