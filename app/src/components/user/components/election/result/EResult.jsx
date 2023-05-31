@@ -79,7 +79,7 @@ export default function EResult() {
           </div>
         </div>
         <div className="col-7">
-          <div className="row justify-content-center">
+          <div className="row justify-content-center" style={{ height: "350px", overflowY: "scroll", overflowX: "hidden" }}>
             {winner && winner.map((winner, index) => {
               return (
                 <div className="col-6 p-1" >
