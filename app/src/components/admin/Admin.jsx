@@ -39,7 +39,7 @@ export default function Admin(props) {
           <div className="layout-page">
             <Navbar logout={props.logout} global={props.global} user={props.user} />
             <div className="content-wrapper">
-              <div className="container-xxl flex-grow-1 container-p-y">
+              <div className="container-xxl flex-grow-1 container-p-y" >
                 <Routes>
                   <Route path="/*" element={<Home count={count} />} />
                   <Route
