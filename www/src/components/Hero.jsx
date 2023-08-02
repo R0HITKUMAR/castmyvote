@@ -46,7 +46,7 @@ export default function Hero(props) {
             </p>
             <div className="d-sm-flex justify-content-center align-items-center">
               <a
-                href="https://app.castmyvote.ml"
+                href="https://app.castmyvote.aboutrohit.in"
                 target="_blank"
                 rel="noreferrer"
                 

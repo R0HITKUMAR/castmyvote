@@ -10,7 +10,7 @@ function changepassword(req, res) {
     dbUser
       .updateOne({ password: hash })
       .then((user) => {
-        const msg = `\nGreetings from CastMyVote\n\nPassword Reset Successfully at ${new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })}\n\nIf not kindly Reset your Password\nhttps://castmyvote.ml/reset.\n\nThank You\nTeam CastMyVote!`;
+        const msg = `\nGreetings from CastMyVote\n\nPassword Reset Successfully at ${new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })}\n\nIf not kindly Reset your Password\nhttps://castmyvote.aboutrohit.in/reset.\n\nThank You\nTeam CastMyVote!`;
         sendSMS(`+91${dbUser.phone}`, msg);
         return res.send({
           success: true,

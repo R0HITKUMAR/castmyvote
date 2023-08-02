@@ -23,7 +23,7 @@ export default function Navbar(props) {
           </div>
           <div className="right-widget d-flex align-items-center ms-auto ms-lg-0 order-lg-3">
             <a
-              href="https://app.castmyvote.ml"
+              href="https://app.castmyvote.aboutrohit.in"
               className="contact-btn-two fs-17 fw-500 tran3s d-none d-lg-block"
             >
               Login
@@ -131,7 +131,7 @@ export default function Navbar(props) {
               <div className="mobile-content d-block d-lg-none">
                 <div className="d-flex flex-column align-items-center justify-content-center mt-70">
                   <a
-                    href="https://app.castmyvote.ml"
+                    href="https://app.castmyvote.aboutrohit.in"
                     className="contact-btn-two fs-17 fw-500 tran3s"
                   >
                     Login

@@ -30,7 +30,7 @@ app.post("/register", async (req, res) => {
       .save()
       .then((user) => {
         welcomeMail(user.name, user.email);
-        const msg = `\nWelcome to CastMyVote\n\nYour account has been Created Successfully\n\nYou can now login into Voter Dashboard to access our services\nhttps://castmyvote.ml.\n\nThank You\nTeam CastMyVote!`;
+        const msg = `\nWelcome to CastMyVote\n\nYour account has been Created Successfully\n\nYou can now login into Voter Dashboard to access our services\nhttps://castmyvote.aboutrohit.in.\n\nThank You\nTeam CastMyVote!`;
         sendSMS(`+91${user.phone}`, msg);
         return res.send({
           message: "User Registered Successfully",

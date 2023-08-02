@@ -59,7 +59,7 @@ export default function Levels() {
                   <li>Results Management</li>
                 </ul>
               </p>
-              <a href="https://app.castmyvote.ml" target="_blank" rel="noreffer" >
+              <a href="https://app.castmyvote.aboutrohit.in" target="_blank" rel="noreffer" >
                 <i className="fa-solid fa-arrow-right" />
               </a>
             </div>
@@ -93,7 +93,7 @@ export default function Levels() {
                   <li>Complaints & Queries</li>
                 </ul>
               </p>
-              <a href="https://app.castmyvote.ml" target="_blank" rel="noreffer" >
+              <a href="https://app.castmyvote.aboutrohit.in" target="_blank" rel="noreffer" >
               <i className="fa-solid fa-arrow-right" />
               </a>
             </div>

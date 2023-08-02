@@ -15,7 +15,7 @@ function createElection(req, res) {
     .save()
     .then((election) => {
       console.log(election);
-      const msg = `\nGreetings from CastMyVote\n\nYou are invited to take part in the ${election.name} [${election.code}].\nPlease vote before ${election.end_date}\nTo know more about ELection visit https://castmyvote.ml/election/${election.election_id} \n\nThank You\nTeam CastMyVote!`;
+      const msg = `\nGreetings from CastMyVote\n\nYou are invited to take part in the ${election.name} [${election.code}].\nPlease vote before ${election.end_date}\nTo know more about ELection visit https://castmyvote.aboutrohit.in/election/${election.election_id} \n\nThank You\nTeam CastMyVote!`;
       sendSMS(`+919084950475`, msg);
       return res.send({
         election: election,

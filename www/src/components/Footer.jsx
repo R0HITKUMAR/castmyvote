@@ -59,16 +59,16 @@ export default function Footer(props) {
               <h5 className="footer-title fw-normal">Links</h5>
               <ul className="footer-nav-link style-none">
                 <li>
-                  <a href="javascript:void(0)">Home</a>
+                  <a href="https://castmyvote.aboutrohit.in">Home</a>
                 </li>
                 <li>
-                  <a href="javascript:void(0)">About</a>
+                  <a href="https://aboutrohit.in">About</a>
                 </li>
                 <li>
-                  <a href="javascript:void(0)">Rohit Kumar</a>
+                  <a href="https://aboutrohit.in">Rohit Kumar</a>
                 </li>
                 <li>
-                  <a href="javascript:void(0)">Try Now</a>
+                  <a href="https://app.castmyvote.aboutrohit.in">Try Now</a>
                 </li>
               </ul>
             </div>

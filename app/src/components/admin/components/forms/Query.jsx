@@ -2,7 +2,7 @@ import React from "react";
 import axios from "../../../common/axios";
 import NoRecord from "../../../common/NoRecord";
 
-export default function query() {
+export default function Query() {
   const [query, setQuery] = React.useState([]);
 
   React.useEffect(() => {
@@ -101,3 +101,4 @@ export default function query() {
     </>
   );
 }
+

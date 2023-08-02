@@ -30,7 +30,7 @@ export default function Snapshot() {
                 We provide a platform to conduct free and fair elections online.{" "}
                 <br />
               </p>
-              <a href="https://app.castmyvote.ml" className="btn-four fw-500">
+              <a href="https://app.castmyvote.aboutrohit.in" className="btn-four fw-500">
                 Get Started
               </a>
             </div>

@@ -20,7 +20,7 @@ const generatePDF = async (data) => {
   pdfDoc.setAuthor("Cast My Vote");
   pdfDoc.setSubject("CMV Voter ID issued by Cast My Vote");
   pdfDoc.setProducer("CMV");
-  pdfDoc.setCreator("CMV (https://castmyvote.ml)");
+  pdfDoc.setCreator("CMV (https://castmyvote.aboutrohit.in)");
 
   // Load Font
 
