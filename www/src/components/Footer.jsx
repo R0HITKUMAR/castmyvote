@@ -153,6 +153,17 @@ export default function Footer(props) {
                   (Powered by Blockchain & Smart Contracts, Made with ❤️ in
                   India)
                   <br />© Cast My Vote, Ghaziabad, Uttar Pradesh, India
+                  <br />
+                  Developed, Maintained and Hosted with ❤️ by
+                  <a
+                    href="https://aboutrohit.in"
+                    className="mx-2"
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{ textDecoration: "none" }}
+                  >
+                    <u>Rohit Kumar</u>
+                  </a>
                 </small>
               </p>
             </div>
