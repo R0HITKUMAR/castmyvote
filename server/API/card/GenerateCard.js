@@ -1,18 +1,17 @@
 import { PDFDocument, rgb, degrees } from "pdf-lib";
-import fs, { readFileSync } from "fs";
 import fetch from "node-fetch";
 import fontkit from "@pdf-lib/fontkit";
 import Card from "../../models/CMV_ID.js";
-import AWS from "aws-sdk";
 import { sendWhatsAppDoc } from "../sms/WhatsApp.js";
 import { sendVoterID } from "../mail/Mail.js";
 import sendSMS from "../sms/SMS.js";
-import Jimp from "jimp";
+import { storage } from "../../firebase.js";
+import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 
 const generatePDF = async (data) => {
   // Fetch
   const pdfRaw = await fetch(
-    "https://firebasestorage.googleapis.com/v0/b/aboutrohitin.appspot.com/o/castmyvote%2Fassets%2FCMV_ID.pdf?alt=media&token=5fc23488-72cb-48e9-86f2-8374b9feca4b"
+    "https://files.aboutrohit.in/castmyvote/CMV_ID.pdf"
   ).then((res) => res.arrayBuffer());
 
   const pdfDoc = await PDFDocument.load(pdfRaw);
@@ -26,11 +25,11 @@ const generatePDF = async (data) => {
   // Load Font
 
   const codeBold = await fetch(
-    "https://firebasestorage.googleapis.com/v0/b/aboutrohitin.appspot.com/o/castmyvote%2Fassets%2Ffonts%2Fcode_bold.otf?alt=media&token=03fc3cc3-a075-4d2c-b063-6ea09685aa9f"
+    "https://files.aboutrohit.in/castmyvote/fonts/code_bold.otf"
   ).then((res) => res.arrayBuffer());
   const codeBoldFont = await pdfDoc.embedFont(codeBold);
   const codeLight = await fetch(
-    "https://firebasestorage.googleapis.com/v0/b/aboutrohitin.appspot.com/o/castmyvote%2Fassets%2Ffonts%2Fcode_light.otf?alt=media&token=94daad96-04bf-4ce6-85cf-4edf61fecd24"
+    "https://files.aboutrohit.in/castmyvote/fonts/code_light.otf"
   ).then((res) => res.arrayBuffer());
   const codeLightFont = await pdfDoc.embedFont(codeLight);
 
@@ -40,10 +39,10 @@ const generatePDF = async (data) => {
   //Fetch Image from URL
 
 
-  // const photoImageBytes = await fetch(data.photo).then((res) =>
-  //   res.arrayBuffer()
-  // );
-  // const photoImage = await pdfDoc.embedPng(photoImageBytes);
+  const photoImageBytes = await fetch(data.photo).then((res) =>
+    res.arrayBuffer()
+  );
+  const photoImage = await pdfDoc.embedPng(photoImageBytes);
 
   firstPage.drawText(data.id_no, {
     x: 180,
@@ -52,24 +51,24 @@ const generatePDF = async (data) => {
     font: codeBoldFont,
     color: rgb(0, 0, 0),
   });
-  // firstPage.drawImage(photoImage, {
-  //   // QR Code
-  //   x: 48,
-  //   y: 595,
-  //   width: 50,
-  //   height: 70,
-  // });
-
-  const pngImageBytes = await fetch(
-    `https://www.cognex.com/api/Sitecore/Barcode/Get?data=${data.id_no}&code=BCL_CODE128&width=1000&imageType=PNG&foreColor=%23000000&backColor=%23FFFFFF&rotation=RotateNoneFlipNone`
-  ).then((res) => res.arrayBuffer());
-  const pngImage = await pdfDoc.embedPng(pngImageBytes);
-  firstPage.drawImage(pngImage, {
-    x: 35,
-    y: 672,
-    width: 130,
-    height: 20,
+  firstPage.drawImage(photoImage, {
+    // QR Code
+    x: 48,
+    y: 595,
+    width: 50,
+    height: 70,
   });
+
+  // const pngImageBytes = await fetch(
+  //   `https://www.cognex.com/api/Sitecore/Barcode/Get?data=${data.id_no}&code=BCL_CODE128&width=1000&imageType=PNG&foreColor=%23000000&backColor=%23FFFFFF&rotation=RotateNoneFlipNone`
+  // ).then((res) => res.arrayBuffer());
+  // const pngImage = await pdfDoc.embedPng(pngImageBytes);
+  // firstPage.drawImage(pngImage, {
+  //   x: 35,
+  //   y: 672,
+  //   width: 130,
+  //   height: 20,
+  // });
 
   firstPage.drawText(
     `${data.name} \n${data.fName} \n${data.dob} \n${data.gender}`,
@@ -131,17 +130,16 @@ const generatePDF = async (data) => {
           return ((Math.random() * 16) | 0).toString(16);
         })
         .toLowerCase() +
-      "." +
-      file.originalname.split(".")[1];
+      ".pdf";
 
-    const storageRef = ref(storage, `"castmyvote/cmv_id/${filename}`);
+    const storageRef = ref(storage, `castmyvote/cmv_id/${filename}`);
     // Set the upload type.
     const metadata = {
-      contentType: file.mimetype,
+      contentType: "application/pdf",
       cacheControl: "public",
     };
     // Upload the file and metadata
-    const uploadTask = uploadBytesResumable(storageRef, file.buffer, metadata);
+    const uploadTask = uploadBytesResumable(storageRef, pdfBytes, metadata);
 
     uploadTask.on(
       "state_changed",
@@ -170,7 +168,6 @@ const generatePDF = async (data) => {
             .catch((err) => {
               console.log(err);
             });
-          res.send({ Location: downloadURL });
         });
       }
     );
