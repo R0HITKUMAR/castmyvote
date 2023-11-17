@@ -1,12 +1,13 @@
 import express from "express";
-import fs from "fs";
-import AWS from "aws-sdk";
 import multer from "multer";
-var cmv = express.Router();
+import { storage } from "../firebase.js";
+import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+var server = express.Router();
 
 const upload = multer();
-cmv.post("/upload", upload.single("file"), function (req, res, next) {
+server.post("/upload", upload.single("file"), function (req, res, next) {
   const file = req.file;
+  console.log("File Upload Started");
   const location = req.body.location;
   if (file) {
     var timestamp = ((new Date().getTime() / 1000) | 0).toString(16);
@@ -20,31 +21,34 @@ cmv.post("/upload", upload.single("file"), function (req, res, next) {
       "." +
       file.originalname.split(".")[1];
 
-    // Upload file to S3
-    const s3 = new AWS.S3({
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-      region: process.env.AWS_REGION,
-    });
+    const storageRef = ref(storage, `${location}/${filename}`);
+    // Set the upload type.
+    const metadata = {
+      contentType: file.mimetype,
+      cacheControl: "public",
+    };
+    // Upload the file and metadata
+    const uploadTask = uploadBytesResumable(storageRef, file.buffer, metadata);
 
-    s3.upload({
-      Bucket: process.env.AWS_BUCKET_NAME,
-      Key: location + "/" + filename,
-      Body: file.buffer,
-      ContentType: file.mimetype,
-    })
-      .on("httpUploadProgress", function (evt) {
-        // console.log(parseInt((evt.loaded / evt.total) * 100));
-      })
-      .send(function (err, data) {
-        if (err) {
-          console.log(err);
-        } else {
-          res.send(data);
-          console.log(data);
-        }
-      });
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        console.log("Upload is " + progress + "% done");
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          console.log("File available at", downloadURL);
+          res.send({ Location: downloadURL });
+        });
+      }
+    );
   }
 });
 
-export default cmv;
+export default server;

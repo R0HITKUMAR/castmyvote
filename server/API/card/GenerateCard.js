@@ -7,11 +7,12 @@ import AWS from "aws-sdk";
 import { sendWhatsAppDoc } from "../sms/WhatsApp.js";
 import { sendVoterID } from "../mail/Mail.js";
 import sendSMS from "../sms/SMS.js";
+import Jimp from "jimp";
 
 const generatePDF = async (data) => {
   // Fetch
   const pdfRaw = await fetch(
-    "https://s3.us-east-1.amazonaws.com/rohit-kumar/castmyvote/assets/CMV_ID.pdf"
+    "https://firebasestorage.googleapis.com/v0/b/aboutrohitin.appspot.com/o/castmyvote%2Fassets%2FCMV_ID.pdf?alt=media&token=5fc23488-72cb-48e9-86f2-8374b9feca4b"
   ).then((res) => res.arrayBuffer());
 
   const pdfDoc = await PDFDocument.load(pdfRaw);
@@ -25,11 +26,11 @@ const generatePDF = async (data) => {
   // Load Font
 
   const codeBold = await fetch(
-    "https://s3.us-east-1.amazonaws.com/rohit-kumar/castmyvote/assets/fonts/code_bold.otf"
+    "https://firebasestorage.googleapis.com/v0/b/aboutrohitin.appspot.com/o/castmyvote%2Fassets%2Ffonts%2Fcode_bold.otf?alt=media&token=03fc3cc3-a075-4d2c-b063-6ea09685aa9f"
   ).then((res) => res.arrayBuffer());
   const codeBoldFont = await pdfDoc.embedFont(codeBold);
   const codeLight = await fetch(
-    "https://s3.us-east-1.amazonaws.com/rohit-kumar/castmyvote/assets/fonts/code_light.otf"
+    "https://firebasestorage.googleapis.com/v0/b/aboutrohitin.appspot.com/o/castmyvote%2Fassets%2Ffonts%2Fcode_light.otf?alt=media&token=94daad96-04bf-4ce6-85cf-4edf61fecd24"
   ).then((res) => res.arrayBuffer());
   const codeLightFont = await pdfDoc.embedFont(codeLight);
 
@@ -37,10 +38,12 @@ const generatePDF = async (data) => {
   const firstPage = pages[0];
 
   //Fetch Image from URL
-  const photoImageBytes = await fetch(data.photo).then((res) =>
-    res.arrayBuffer()
-  );
-  const photoImage = await pdfDoc.embedPng(photoImageBytes);
+
+
+  // const photoImageBytes = await fetch(data.photo).then((res) =>
+  //   res.arrayBuffer()
+  // );
+  // const photoImage = await pdfDoc.embedPng(photoImageBytes);
 
   firstPage.drawText(data.id_no, {
     x: 180,
@@ -49,13 +52,13 @@ const generatePDF = async (data) => {
     font: codeBoldFont,
     color: rgb(0, 0, 0),
   });
-  firstPage.drawImage(photoImage, {
-    // QR Code
-    x: 48,
-    y: 595,
-    width: 50,
-    height: 70,
-  });
+  // firstPage.drawImage(photoImage, {
+  //   // QR Code
+  //   x: 48,
+  //   y: 595,
+  //   width: 50,
+  //   height: 70,
+  // });
 
   const pngImageBytes = await fetch(
     `https://www.cognex.com/api/Sitecore/Barcode/Get?data=${data.id_no}&code=BCL_CODE128&width=1000&imageType=PNG&foreColor=%23000000&backColor=%23FFFFFF&rotation=RotateNoneFlipNone`
@@ -128,43 +131,49 @@ const generatePDF = async (data) => {
           return ((Math.random() * 16) | 0).toString(16);
         })
         .toLowerCase() +
-      ".pdf";
-    // Upload file to S3
-    const s3 = new AWS.S3({
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-      region: process.env.AWS_REGION,
-    });
+      "." +
+      file.originalname.split(".")[1];
 
-    s3.upload({
-      Bucket: process.env.AWS_BUCKET_NAME,
-      Key: "castmyvote/cmv_id/" + data.id_no + "-" + filename,
-      Body: pdfBytes,
-      ContentType: "application/pdf",
-    })
-      .on("httpUploadProgress", function (evt) {
-        // console.log(parseInt((evt.loaded / evt.total) * 100));
-      })
-      .send(function (err, aws) {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log(aws.Location);
+    const storageRef = ref(storage, `"castmyvote/cmv_id/${filename}`);
+    // Set the upload type.
+    const metadata = {
+      contentType: file.mimetype,
+      cacheControl: "public",
+    };
+    // Upload the file and metadata
+    const uploadTask = uploadBytesResumable(storageRef, file.buffer, metadata);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        console.log("Upload is " + progress + "% done");
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          console.log("File available at", downloadURL);
           Card.findOne({ id_no: data.id_no })
             .then((card) => {
-              card.id_doc = aws.Location;
+              card.id_doc = downloadURL;
               card.save();
               sendVoterID(card);
               const msg = `\nGreetings from CMV!\n\n Your Application No. ${card.application_no}  has been approved\n\nYou Voter ID No. : ${card.id_no}\n\nYou will receive your Voter ID through mail or you can download it from User Dashboard \n\nThank You\nTeam CastMyVote!`;
               sendSMS(`+91${card.phone}`, msg);
-              sendWhatsAppDoc(aws.Location);
+              sendWhatsAppDoc(downloadURL);
               console.log("Card Generated ID: " + card.id_no);
             })
             .catch((err) => {
               console.log(err);
             });
-        }
-      });
+          res.send({ Location: downloadURL });
+        });
+      }
+    );
   }
 };
 
