@@ -25,7 +25,7 @@ transporter.use("compile", hbs(handlebarOptions));
 
 function registerOTP(user, OTP) {
   var mailOptions = {
-    from: "CastMyVote <castmyvote@outlook.com>",
+    from: "CastMyVote <support@aboutrohit.in>",
     to: user.email,
     subject: "OTP to verify your Account on CastMyVote",
     template: "registerOTP",
@@ -47,7 +47,7 @@ function registerOTP(user, OTP) {
 
 function welcomeMail(name, email) {
   var mailOptions = {
-    from: "CastMyVote <castmyvote@outlook.com>",
+    from: "CastMyVote <support@aboutrohit.in>",
     to: email,
     subject: "Welcome to CastMyVote",
     template: "welcome",
@@ -68,7 +68,7 @@ function welcomeMail(name, email) {
 
 function loginOTP(user, OTP) {
   var mailOptions = {
-    from: "CastMyVote <castmyvote@outlook.com>",
+    from: "CastMyVote <support@aboutrohit.in>",
     to: user.email,
     subject: "OTP to Login into your Account on CastMyVote",
     template: "loginOTP",
@@ -89,7 +89,7 @@ function loginOTP(user, OTP) {
 
 function resetOTP(user, OTP) {
   var mailOptions = {
-    from: "CastMyVote <castmyvote@outlook.com>",
+    from: "CastMyVote <support@aboutrohit.in>",
     to: user.email,
     subject: "OTP to Reset Password on CastMyVote",
     template: "resetOTP",
@@ -110,7 +110,7 @@ function resetOTP(user, OTP) {
 
 function sendSubscriptionMail(mail) {
   var mailOptions = {
-    from: "CastMyVote <castmyvote@outlook.com>",
+    from: "CastMyVote <support@aboutrohit.in>",
     to: mail,
     subject: "Thanks for Subscribing Us | CastMyVote",
     template: "subscribe",
@@ -127,7 +127,7 @@ function sendSubscriptionMail(mail) {
 
 function thanksmail(user, OTP) {
   var mailOptions = {
-    from: "CastMyVote <castmyvote@outlook.com>",
+    from: "CastMyVote <support@aboutrohit.in>",
     to: user.email,
     subject: "Thanks for your Vote on CastMyVote",
     template: "thanks",
@@ -149,7 +149,7 @@ function thanksmail(user, OTP) {
 
 function sendQueryMail(user) {
   var mailOptions = {
-    from: "CastMyVote <castmyvote@outlook.com>",
+    from: "CastMyVote <support@aboutrohit.in>",
     to: user.email,
     subject: "Thanks for Contacting Us | CastMyVote",
     template: "query",
@@ -172,7 +172,7 @@ function sendQueryMail(user) {
 
 function sendApplication(data) {
   var mailOptions = {
-    from: "CastMyVote <castmyvote@outlook.com>",
+    from: "CastMyVote <support@aboutrohit.in>",
     to: data.email,
     subject: `Application No. ${data.application_no} has been submitted Successfully | CastMyVote`,
     template: "application",
@@ -195,7 +195,7 @@ function sendApplication(data) {
 
 function sendVoterID(data) {
   var mailOptions = {
-    from: "CastMyVote <castmyvote@outlook.com>",
+    from: "CastMyVote <support@aboutrohit.in>",
     to: data.email,
     subject:
       "Application No." +
@@ -228,7 +228,7 @@ function sendVoterID(data) {
 
 function sendCandidateMail(election, candidate) {
   var mailOptions = {
-    from: "CastMyVote <castmyvote@outlook.com>",
+    from: "CastMyVote <support@aboutrohit.in>",
     to: candidate.candidate_email,
     subject: `Regarding Appointment of Contestant for ${election.name}  | CastMyVote`,
     template: "candidate",
