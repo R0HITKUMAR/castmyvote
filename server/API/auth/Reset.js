@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 import User from "../../models/User.js";
 import bcrypt from "bcrypt";
 
-function changepassword(req, res) {
+async function changepassword(req, res) {
   const user = req.body;
   // Update Password
-  const dbUser = User.findOne({ email: user.email });
+  const dbUser = await User.findOne({ email: user.email });
   user.password = bcrypt.hash(user.password, 10).then((hash) => {
     dbUser
       .updateOne({ password: hash })
