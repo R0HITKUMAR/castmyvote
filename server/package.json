@@ -36,5 +36,8 @@
     "pdf-lib": "^1.17.1",
     "sort-json-array": "^0.1.7",
     "web3": "^4.15.0"
+  },
+  "engines": {
+    "node": "v20.18.0"
   }
 }
