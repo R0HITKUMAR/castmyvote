@@ -11,7 +11,7 @@ import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 const generatePDF = async (data) => {
   // Fetch
   const pdfRaw = await fetch(
-    "https://files.aboutrohit.in/castmyvote/CMV_ID.pdf"
+    "https://castmyvote.aboutrohit.in/web/CMV_ID.pdf"
   ).then((res) => res.arrayBuffer());
 
   const pdfDoc = await PDFDocument.load(pdfRaw);
@@ -25,11 +25,11 @@ const generatePDF = async (data) => {
   // Load Font
 
   const codeBold = await fetch(
-    "https://files.aboutrohit.in/castmyvote/fonts/code_bold.otf"
+    "https://castmyvote.aboutrohit.in/web/fonts/code_bold.otf"
   ).then((res) => res.arrayBuffer());
   const codeBoldFont = await pdfDoc.embedFont(codeBold);
   const codeLight = await fetch(
-    "https://files.aboutrohit.in/castmyvote/fonts/code_light.otf"
+    "https://castmyvote.aboutrohit.in/web/fonts/code_light.otf"
   ).then((res) => res.arrayBuffer());
   const codeLightFont = await pdfDoc.embedFont(codeLight);
 

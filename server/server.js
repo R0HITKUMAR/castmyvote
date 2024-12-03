@@ -39,7 +39,7 @@ app.get("/", (req, res) => {
 
 app.listen(PORT, () => {
   ConnectDB()
-    .then(() => console.log(`Server is Running  at Port ✌`))
+    .then(() => console.log(`Server is Running  at Port ${PORT}✌`))
     .catch(() =>
       console.log(
         "Error in Connecting to Database. Please Check your Database Configurations"
