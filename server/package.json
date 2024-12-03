@@ -34,7 +34,6 @@
     "pattern-string-generator": "^1.0.3",
     "pdf-creator-node": "^2.3.5",
     "pdf-lib": "^1.17.1",
-    "puppeteer": "^19.2.0",
     "sort-json-array": "^0.1.7",
     "web3": "^1.9.0"
   },
