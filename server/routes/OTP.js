@@ -4,7 +4,7 @@ const app = express.Router();
 import { registerOTP, loginOTP, resetOTP } from "../API/mail/Mail.js";
 import sendSMS from "../API/sms/SMS.js";
 
-app.post("/:reason", (req, res) => {
+app.post("/:reason", async(req, res) => {
   const data = req.body;
   const OTP = Math.floor(100000 + Math.random() * 900000).toString();
   console.log(OTP);
@@ -15,7 +15,7 @@ app.post("/:reason", (req, res) => {
     sendSMS(`+91${data.phone}`, msg);
   } else if (req.params.reason === "login") {
     loginOTP(data, OTP);
-    User.findOne({ email: data.email }, (err, user) => {
+    await User.findOne({ email: data.email }, (err, user) => {
       if (err) {
         console.log(err);
       } else if (user) {
@@ -25,7 +25,7 @@ app.post("/:reason", (req, res) => {
     });
   } else if (req.params.reason === "reset") {
     resetOTP(data, OTP);
-    User.findOne({ email: data.email }, (err, user) => {
+    await User.findOne({ email: data.email }, (err, user) => {
       if (err) {
         console.log(err);
       } else if (user) {

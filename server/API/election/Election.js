@@ -66,8 +66,8 @@ function retrieveAllElections(req, res) {
     });
 }
 
-function retrieveOneElection(req, res) {
-  Election.findOne({ election_id: req.params.id })
+async function retrieveOneElection(req, res) {
+  await Election.findOne({ election_id: req.params.id })
     .then((election) => {
       const s = new Date(election.s_date);
       const e = new Date(election.e_date);
@@ -95,8 +95,8 @@ function retrieveOneElection(req, res) {
     });
 }
 
-function updateElection(req, res) {
-  Election.findOneAndUpdate({ election_id: req.body.election_id }, req.body)
+async function updateElection(req, res) {
+  await Election.findOneAndUpdate({ election_id: req.body.election_id }, req.body)
     .then((election) => {
       return res.send({
         election: election,
@@ -112,9 +112,9 @@ function updateElection(req, res) {
     });
 }
 
-function deleteElection(req, res) {
+async function deleteElection(req, res) {
   const id = req.params.id;
-  Election.findOneAndDelete({ election_id: id })
+  await Election.findOneAndDelete({ election_id: id })
     .then((election) => {
       return res.send({
         election: election,
@@ -130,10 +130,10 @@ function deleteElection(req, res) {
     });
 }
 
-function getResults(req, res) {
+async function getResults(req, res) {
   const id = req.params.id;
   // Check for End Date
-  Election.findOne({ election_id: id })
+  await Election.findOne({ election_id: id })
     .then((election) => {
       const e = new Date(election.e_date);
       const date = new Date().toLocaleString("en-US", {

@@ -6,7 +6,7 @@ import { sendVoterID, sendApplication } from "../mail/Mail.js";
 import { sendWhatsAppDoc, sendWhatsAppMsg } from "../sms/WhatsApp.js";
 import sendSMS from "../sms/SMS.js";
 
-function register(req, res) {
+async function register(req, res) {
   const card = req.body;
   const newCard = new Card({
     name: card.name,
@@ -27,12 +27,12 @@ function register(req, res) {
   });
   newCard
     .save()
-    .then((card) => {
+    .then(async(card) => {
       sendApplication(card);
       const msg = `\nGreetings from CMV!\n\n Your Application for new Voter ID has been submitted Successfully with Application No. ${card.application_no
         } at ${new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })}\n\nYou will receive your Voter ID through mail once your application is approved. or You can track status by User Login.\n\nThank You\nTeam CastMyVote!`;
       sendSMS(`+91${card.phone}`, msg);
-      User.findOne({ email: card.email }).then((user) => {
+      await User.findOne({ email: card.email }).then((user) => {
         if (user) {
           user.application_no = card.application_no;
           user.save();
@@ -87,8 +87,8 @@ function retrieveAllApplications(req, res) {
     });
 }
 
-function retrieveOne(req, res) {
-  Card.findOne({ id_no: req.params.id })
+async function retrieveOne(req, res) {
+  await Card.findOne({ id_no: req.params.id })
     .then((card) => {
       return res.send({
         card: card,
@@ -103,8 +103,8 @@ function retrieveOne(req, res) {
     });
 }
 
-function retrieveOneApplication(req, res) {
-  Card.findOne({ application_no: req.params.id })
+async function retrieveOneApplication(req, res) {
+  await Card.findOne({ application_no: req.params.id })
     .then((card) => {
       return res.send({
         application: card,
@@ -120,22 +120,22 @@ function retrieveOneApplication(req, res) {
 }
 
 
-function approve(req, res) {
+async function approve(req, res) {
   const id = req.body.id;
   console.log(req.body.id);
   const generator = new Generator();
   const pattern = "/CMV/CVCVCV//000";
   const cmv_id = generator.pattern(pattern);
 
-  Card.findOne({ application_no: id })
-    .then((card) => {
+  await Card.findOne({ application_no: id })
+    .then(async(card) => {
       card.status = "Approved";
       card.id_no = cmv_id;
       card.id_date = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
       card.id_doc = "";
       card.save();
 
-      User.findOne({ email: card.email }).then((user) => {
+      await User.findOne({ email: card.email }).then((user) => {
         if (user) {
           user.id_no = cmv_id;
           user.save();

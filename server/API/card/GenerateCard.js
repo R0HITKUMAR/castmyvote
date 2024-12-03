@@ -153,9 +153,9 @@ const generatePDF = async (data) => {
         console.log(error);
       },
       () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+        getDownloadURL(uploadTask.snapshot.ref).then(async(downloadURL) => {
           console.log("File available at", downloadURL);
-          Card.findOne({ id_no: data.id_no })
+          await Card.findOne({ id_no: data.id_no })
             .then((card) => {
               card.id_doc = downloadURL;
               card.save();

@@ -28,8 +28,8 @@ function verifyJWT(req, res, next) {
   }
 }
 
-app.get("/validate/:token", verifyJWT, (req, res) => {
-  User.findOne({ _id: res.id }, (err, user) => {
+app.get("/validate/:token", verifyJWT, async(req, res) => {
+  await User.findOne({ _id: res.id }, (err, user) => {
     if (err) {
       console.log(err);
       return res.send({

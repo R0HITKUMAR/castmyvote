@@ -1,11 +1,11 @@
 import Newsletter from "../../models/Newsletter.js";
 import { sendSubscriptionMail } from "../mail/Mail.js";
 
-function addNewsletter(req, res) {
+async function addNewsletter(req, res) {
   const newsletter = new Newsletter(req.body);
   newsletter.timestamp = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
   // Check if email already exists
-  Newsletter.findOne({ email: newsletter.email })
+  await Newsletter.findOne({ email: newsletter.email })
     .then((newsl) => {
       if (newsl) {
         return res.send({ message: "You are already Subscribed!" });

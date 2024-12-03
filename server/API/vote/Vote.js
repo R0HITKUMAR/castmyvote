@@ -18,7 +18,7 @@ async function castVote(req, res) {
   });
 
   // Increase the candidate's vote count
-  Election.findOne({ election_id: election_id }, (err, election) => {
+  await Election.findOne({ election_id: election_id }, (err, election) => {
     if (err) {
       console.log(err);
     } else {
@@ -48,7 +48,7 @@ async function castVote(req, res) {
   });
 
   // Add Election Details to Card
-  Card.findOne({ id_no: voter_id }, (err, card) => {
+  await Card.findOne({ id_no: voter_id }, (err, card) => {
     if (err) {
       console.log(err);
     } else {

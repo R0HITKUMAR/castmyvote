@@ -3,11 +3,11 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import sendSMS from "../sms/SMS.js";
 
-function Login(req, res) {
+async function Login(req, res) {
   const userLoggingIn = req.body;
   let tokentime = "15m";
 
-  User.findOne({ email: userLoggingIn.email }).then((dbUser) => {
+  await User.findOne({ email: userLoggingIn.email }).then((dbUser) => {
     if (!dbUser) {
       return res.send({
         message: "No Account Found with this Email",

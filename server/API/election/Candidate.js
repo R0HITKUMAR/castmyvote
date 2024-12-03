@@ -2,14 +2,14 @@ import Election from "../../models/Elections.js";
 import { sendCandidateMail } from "../mail/Mail.js";
 import Generator from "pattern-string-generator";
 
-function addCandidate(req, res) {
+async function addCandidate(req, res) {
   const body = req.body;
   // console.log(body);
   const eid = req.params.eid;
   const generator = new Generator();
   const pattern = "/CMVCD/CV//0000";
   const id = generator.pattern(pattern);
-  Election.findOne({ election_id: eid })
+  await Election.findOne({ election_id: eid })
     .then((election) => {
       if (election) {
         const candidates = election.candidates;
@@ -58,10 +58,10 @@ function addCandidate(req, res) {
     });
 }
 
-function deleteCandidate(req, res) {
+async function deleteCandidate(req, res) {
   const eid = req.params.eid;
   const cid = req.params.cid;
-  Election.findOne({ election_id: eid })
+  await Election.findOne({ election_id: eid })
     .then((election) => {
       if (election) {
         const candidates = election.candidates;
